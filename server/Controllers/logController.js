@@ -41,7 +41,7 @@ logController.fetchLogs = (req, res, next) => {
   // Parameters for the describeLogStreams method
   const paramsDescribe = {
     // Use only the name of the log group, not the full ARN
-    logGroupName: "/aws/lambda/newTest", // The log group name
+    logGroupName: "/aws/lambda/Log-Grabber", // The log group name
     // You can add additional parameters as needed
   };
 
