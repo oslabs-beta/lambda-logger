@@ -19,6 +19,11 @@ app.get("/logs", logController.fetchLogs, (req, res) => {
   return res.status(200).json(res.locals.logs);
 });
 
+app.get("/loggroups", logController.fetchLogGroups, (req, res) => {
+  console.log("made it through middleware");
+  return res.status(200).json(res.locals.loggroups);
+});
+
 // 404 route
 app.all("*", (req, res) => {
   res.status(404).send("The page you are looking for does not exist");
