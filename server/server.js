@@ -13,6 +13,7 @@ app.use(express.static(path.resolve(__dirname, "../client")));
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, "../client/src/index.html"));
 });
+/* ******************************************** GET REQUEST ROUTES ***************************************** */
 
 app.get("/logs", logController.fetchLogs, (req, res) => {
   console.log("made it through middleware");
