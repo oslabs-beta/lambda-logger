@@ -23,7 +23,8 @@
     "pg-promise": "^10.7.5-beta.1",
     "postgres": "^3.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
