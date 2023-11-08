@@ -1,5 +1,5 @@
-const path = require('path');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: "./client/src/index.js",
 
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     proxy: {
-      "/server": "http://localhost:3000/",
+      "/": "http://localhost:3000/",
     },
   },
 
