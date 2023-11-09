@@ -7,6 +7,7 @@ import '../src/styles.css';
 export default function Console({ jsonObject, theme }) {
   SyntaxHighlighter.registerLanguage('json', json);
   const jsonString = JSON.stringify(jsonObject, null, 2);
+  
 /* Favorite styles
 atomOneDark
 stackoverflowDark

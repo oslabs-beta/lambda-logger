@@ -44,6 +44,7 @@ logController.fetchLogs = (req, res, next) => {
   console.log("AccessKey state", req.query.accessKey);
   console.log("Secret Key state", req.query.secretKey);
   console.log("Region state", req.query.region);
+  /* UNCOMMENT THIS CONFIG OBJ ONCE WE HAVE ACCESS KEY, SECRET KEY, AND REGION STATE WIRED UP */
   // AWS.config.update({
   //   accessKeyId: process.env.ACCESS_KEY,
   //   secretAccessKey: process.env.SECRET_KEY,

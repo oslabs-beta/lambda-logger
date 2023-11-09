@@ -6,7 +6,7 @@ import '../src/styles.css';
 
 const App = () => {
 
-  /* Initialize State for Entry Point  */
+  /*********************** Initialize State for Entry Point  ***************************/
   const [accessKey, setAccessKey] = useState('hi');
   const [secretKey, setSecretKey] = useState('hello');
   const [region, setRegion] = useState('region');
