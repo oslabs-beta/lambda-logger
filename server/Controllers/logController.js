@@ -38,9 +38,17 @@ logController.fetchLogGroups = (req, res, next) => {
 
 logController.fetchLogs = (req, res, next) => {
   const paramsDescribe = {
-    logGroupName: "/aws/lambda/Log-Grabber",
+    logGroupName: "/aws/lambda/helloWorldTest",
   };
-
+  console.log("request query", req.query);
+  console.log("AccessKey state", req.query.accessKey);
+  console.log("Secret Key state", req.query.secretKey);
+  console.log("Region state", req.query.region);
+  // AWS.config.update({
+  //   accessKeyId: process.env.ACCESS_KEY,
+  //   secretAccessKey: process.env.SECRET_KEY,
+  //   region: process.env.REGION,
+  // });
   cloudWatchLogs.describeLogStreams(paramsDescribe, function (err, data) {
     if (err) {
       return next(err); // Pass the error to the Express error handler
@@ -48,7 +56,6 @@ logController.fetchLogs = (req, res, next) => {
       if (!data.logStreams || data.logStreams.length === 0) {
         return next(new Error("No log streams found")); // Handle the case where there are no log streams
       }
-
       const stream = data.logStreams[0];
       const paramsGet = {
         logGroupName: paramsDescribe.logGroupName,
