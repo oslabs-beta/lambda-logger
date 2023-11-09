@@ -18,7 +18,7 @@ stackoverflowLight
   return (
     <>
       <h1>THE CONSOLE</h1>
-      <span>this is displaying from Console.jsx</span>
+      {/* <span>this is displaying from Console.jsx</span> */}
       <div id="themeButton">
         <button onClick={handleThemeButtonClick}>{themeButton}</button>
       </div>

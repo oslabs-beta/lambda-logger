@@ -1,20 +1,22 @@
 import React from 'react';
 import {useState, useEffect} from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './Header.jsx';
 import Console from './Console.jsx'
 import '../src/styles.css';
 import { stackoverflowDark, stackoverflowLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import Credentials from './Credentials.jsx';
 
 
 const App = () => {
 
   /*********************** Initialize State for Entry Point  ***************************/
-  const [accessKey, setAccessKey] = useState("AKIAYTC76N32AJC4NBCG");
-  const [secretKey, setSecretKey] = useState("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");
-  const [region, setRegion] = useState("us-east-1");
+  const [accessKey, setAccessKey] = useState("");
+  const [secretKey, setSecretKey] = useState("");
+  const [region, setRegion] = useState("");
   const [logGroups, setLogGroups] = useState('');
-  const [stream, setStream] = useState('');
-  
+  const [stream, setStream] = useState('NO LOGS REQUESTED YET');
+  console.log(accessKey)
   // theme choosing
   const [theme, setTheme] = useState(stackoverflowDark);
   const [themeButton, setThemeButton] = useState('Light Mode');
@@ -99,15 +101,21 @@ async function getLogGroups (accKey, secKey, reg) {
   }
 
   return (
-    <>
+    <Router>
         <Header />
-        <Console
+        <Routes>
+          <Route path="/" element={<Credentials
+          setAccessKey={setAccessKey}
+          setSecretKey={setSecretKey}/>}/>
+          <Route path="/console" element={<Console
           handleThemeButtonClick = {handleThemeButtonClick} 
           themeButton = {themeButton}
           jsonObject={stream}
           theme = {theme}
-        />
-    </>
+        />} />
+        </Routes>
+        
+    </Router>
   );
 };
 

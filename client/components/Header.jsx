@@ -6,8 +6,6 @@ export default function Header() {
   return (
     <div className='Head'>
         <h3>Lambda Logger</h3>
-        
-        <h3>Enter Credentials</h3>
           
     </div>
   );
