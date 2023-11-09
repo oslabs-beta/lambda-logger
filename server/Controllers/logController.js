@@ -1,14 +1,14 @@
 const AWS = require("aws-sdk");
 require("dotenv").config();
 // Configure AWS with your credentials and region
-AWS.config.update({
-  accessKeyId: process.env.ACCESS_KEY,
-  secretAccessKey: process.env.SECRET_KEY,
-  region: process.env.REGION,
-});
+// AWS.config.update({
+//   accessKeyId: process.env.ACCESS_KEY,
+//   secretAccessKey: process.env.SECRET_KEY,
+//   region: process.env.REGION,
+// });
 
 // Create a CloudWatchLogs client
-const cloudWatchLogs = new AWS.CloudWatchLogs();
+
 const logController = {};
 
 /********************* FETCH LOG GROUPS ***********************************************/
@@ -17,7 +17,23 @@ logController.fetchLogGroups = (req, res, next) => {
   const params = {
     limit: "50",
   };
+  // Access the headers instead of query parameters
+  const accessKey = req.headers["access-key"];
+  const secretKey = req.headers["secret-key"];
+  const region = req.headers["aws-region"];
 
+  // Check if all necessary credentials are provided
+  if (!accessKey || !secretKey || !region) {
+    return next(new Error("Missing AWS credentials in headers"));
+  }
+
+  // Update the AWS config with the credentials from the headers
+  AWS.config.update({
+    accessKeyId: decodeURIComponent(accessKey),
+    secretAccessKey: decodeURIComponent(secretKey),
+    region: decodeURIComponent(region),
+  });
+  const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
     console.log("inside Describe Log Groups");
     if (err) {
@@ -40,16 +56,24 @@ logController.fetchLogs = (req, res, next) => {
   const paramsDescribe = {
     logGroupName: "/aws/lambda/helloWorldTest",
   };
-  console.log("request query", req.query);
-  console.log("AccessKey state", req.query.accessKey);
-  console.log("Secret Key state", req.query.secretKey);
-  console.log("Region state", req.query.region);
-  /* UNCOMMENT THIS CONFIG OBJ ONCE WE HAVE ACCESS KEY, SECRET KEY, AND REGION STATE WIRED UP */
-  // AWS.config.update({
-  //   accessKeyId: process.env.ACCESS_KEY,
-  //   secretAccessKey: process.env.SECRET_KEY,
-  //   region: process.env.REGION,
-  // });
+
+  // Access the headers instead of query parameters
+  const accessKey = req.headers["access-key"];
+  const secretKey = req.headers["secret-key"];
+  const region = req.headers["aws-region"];
+
+  // Check if all necessary credentials are provided
+  if (!accessKey || !secretKey || !region) {
+    return next(new Error("Missing AWS credentials in headers"));
+  }
+
+  // Update the AWS config with the credentials from the headers
+  AWS.config.update({
+    accessKeyId: decodeURIComponent(accessKey),
+    secretAccessKey: decodeURIComponent(secretKey),
+    region: decodeURIComponent(region),
+  });
+  const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogStreams(paramsDescribe, function (err, data) {
     if (err) {
       return next(err); // Pass the error to the Express error handler
