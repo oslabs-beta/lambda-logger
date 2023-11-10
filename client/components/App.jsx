@@ -16,7 +16,6 @@ const App = () => {
   const [region, setRegion] = useState("");
   const [logGroups, setLogGroups] = useState('');
   const [stream, setStream] = useState('NO LOGS REQUESTED YET');
-  console.log(accessKey)
   // theme choosing
   const [theme, setTheme] = useState(stackoverflowDark);
   const [themeButton, setThemeButton] = useState('Light Mode');
@@ -50,12 +49,12 @@ const App = () => {
     }
   }
 
-  useEffect(() => {
-    const accKey = accessKey
-    const secKey = secretKey
-    const reg = region
-    getLogs(accKey, secKey, reg)
-  }, []);
+  // useEffect(() => {
+  //   const accKey = accessKey
+  //   const secKey = secretKey
+  //   const reg = region
+  //   getLogs(accKey, secKey, reg)
+  // }, []);
 
 /* ***************************** Fetch Log Groups State  ************************ */
 
@@ -106,7 +105,12 @@ async function getLogGroups (accKey, secKey, reg) {
         <Routes>
           <Route path="/" element={<Credentials
           setAccessKey={setAccessKey}
-          setSecretKey={setSecretKey}/>}/>
+          accessKey={accessKey}
+          setSecretKey={setSecretKey}
+          secretKey={secretKey}
+          setRegion={setRegion}
+          region={region}
+          getLogs={getLogs}/>}/>
           <Route path="/console" element={<Console
           handleThemeButtonClick = {handleThemeButtonClick} 
           themeButton = {themeButton}
