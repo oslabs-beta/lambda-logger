@@ -25,10 +25,17 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
     "sa-south-1"
   ];
   
-  const regionOptions = regions.map((region, index) => {
-    return (<option key={index} value={region}>{region}</option>)
-  })
-
+  // const regionOptions = regions.map((region, index) => {
+  //   return (<option key={index} value={region}>{region}</option>)
+  // })
+  
+  const regionOptions = [
+    // Adding a default option with a value that is not in the list
+    <option key="default" value="">Select a Region</option>,
+    ...regions.map((region, index) => (
+      <option key={index} value={region}>{region}</option>
+    ))
+  ];
   return (
     <div className='Head'>
         <h3>Enter Credentials</h3>
@@ -47,7 +54,7 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
                     />
                 </label>
             </form>
-            <select onChange={(e) => setRegion(e.target.value)}>
+            <select value={region} onChange={(e) => setRegion(e.target.value)}>
                 {regionOptions}
             </select>
             <Link to='/console'><button onClick={() => getLogs(accessKey, secretKey, region)}>submit</button></Link>
