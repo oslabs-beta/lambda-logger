@@ -19,9 +19,7 @@ stackoverflowLight
     <>
       {/* <h1>THE CONSOLE</h1> */}
       {/* <span>this is displaying from Console.jsx</span> */}
-      <div id="themeButton">
-        <button onClick={handleThemeButtonClick}>{themeButton}</button>
-      </div>
+      
       <SyntaxHighlighter language="json" style={theme} showLineNumbers={true} showInlineLineNumbers={true}// This prop enables line numbers
         lineNumberStyle={{ color: '#aaa', paddingRight: '10px' }} className="json-ide">
         {jsonString}

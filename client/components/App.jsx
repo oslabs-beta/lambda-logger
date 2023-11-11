@@ -6,6 +6,7 @@ import Console from './Console.jsx'
 import '../src/styles.css';
 import { stackoverflowDark, stackoverflowLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Credentials from './Credentials.jsx';
+import ConsoleNav from './ConsoleNav.jsx';
 
 
 const App = () => {
@@ -111,12 +112,20 @@ async function getLogGroups (accKey, secKey, reg) {
           setRegion={setRegion}
           region={region}
           getLogs={getLogs}/>}/>
-          <Route path="/console" element={<Console
-          handleThemeButtonClick = {handleThemeButtonClick} 
-          themeButton = {themeButton}
-          jsonObject={stream}
-          theme = {theme}
-        />} />
+          <Route path="/console" element={
+    <>
+      <ConsoleNav 
+      handleThemeButtonClick={handleThemeButtonClick} 
+      themeButton={themeButton}
+      />
+      <Console
+        handleThemeButtonClick={handleThemeButtonClick} 
+        themeButton={themeButton}
+        jsonObject={stream}
+        theme={theme}
+      />
+    </>
+  } />
         </Routes>
         
     </Router>
