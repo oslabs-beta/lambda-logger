@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function Credentials({setAccessKey, setSecretKey, setRegion, getLogs, accessKey, secretKey, region}) {
+export default function Credentials({setAccessKey, setSecretKey, setRegion, getLogs, accessKey, secretKey, region, getLogGroups}) {
   const regions = [
     "us-east-1", 
     "us-east-2",
@@ -57,7 +57,7 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
             <select value={region} onChange={(e) => setRegion(e.target.value)}>
                 {regionOptions}
             </select>
-            <Link to='/console'><button onClick={() => getLogs(accessKey, secretKey, region)}>submit</button></Link>
+            <Link to='/console'><button onClick={() => getLogGroups(accessKey, secretKey, region)}>submit</button></Link>
         </div>
     </div>
   );

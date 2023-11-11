@@ -80,6 +80,7 @@ async function getLogGroups (accKey, secKey, reg) {
   console.log("in use Effect")
   const data = await response.json()
   setLogGroups(data)
+  console.log("log Groups:", logGroups)
   } catch (error) {
     console.log(error)
   }
@@ -111,16 +112,16 @@ async function getLogGroups (accKey, secKey, reg) {
           secretKey={secretKey}
           setRegion={setRegion}
           region={region}
-          getLogs={getLogs}/>}/>
+          getLogs={getLogs}
+          getLogGroups={getLogGroups}/>}/>
           <Route path="/console" element={
     <>
       <ConsoleNav 
       handleThemeButtonClick={handleThemeButtonClick} 
       themeButton={themeButton}
+      logGroups={logGroups}
       />
       <Console
-        handleThemeButtonClick={handleThemeButtonClick} 
-        themeButton={themeButton}
         jsonObject={stream}
         theme={theme}
       />
