@@ -1,5 +1,5 @@
-const AWS = require("aws-sdk");
-require("dotenv").config();
+const AWS = require('aws-sdk');
+require('dotenv').config();
 // Configure AWS with your credentials and region
 // AWS.config.update({
 //   accessKeyId: process.env.ACCESS_KEY,
@@ -15,16 +15,16 @@ const logController = {};
 
 logController.fetchLogGroups = (req, res, next) => {
   const params = {
-    limit: "50",
+    limit: '50',
   };
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -35,15 +35,15 @@ logController.fetchLogGroups = (req, res, next) => {
   });
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
-    console.log("inside Describe Log Groups");
+    console.log('inside Describe Log Groups');
     if (err) {
-      console.log("Error", err);
+      console.log('Error', err);
       return next(err);
     } else {
       const groupNames = data.logGroups.map((group) => {
         return group.logGroupName;
       });
-      console.log("Log Groups", groupNames);
+      console.log('Log Groups', groupNames);
       res.locals.loggroups = groupNames;
       return next();
     }
@@ -53,19 +53,19 @@ logController.fetchLogGroups = (req, res, next) => {
 /********************* FETCH LOG STREAMS ***********************************************/
 
 logController.fetchLogStreams = (req, res, next) => {
-  console.log("inside fetch streams,");
+  console.log('inside fetch streams,');
   const paramsDescribe = {
-    logGroupName: decodeURIComponent(req.headers["log-group"]),
+    logGroupName: decodeURIComponent(req.headers['log-group']),
   };
 
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -80,13 +80,13 @@ logController.fetchLogStreams = (req, res, next) => {
       return next(err); // Pass the error to the Express error handler
     } else {
       if (!data.logStreams || data.logStreams.length === 0) {
-        return next(new Error("No log streams found")); // Handle the case where there are no log streams
+        return next(new Error('No log streams found')); // Handle the case where there are no log streams
       }
       const streams = data.logStreams;
       const streamnames = streams.map((stream) => {
         return stream.logStreamName;
       });
-      console.log("streams pulled from API:", streamnames);
+      console.log('streams pulled from API:', streamnames);
       res.locals.streams = streamnames;
       return next();
     }
@@ -96,18 +96,18 @@ logController.fetchLogStreams = (req, res, next) => {
 
 logController.fetchLogs = (req, res, next) => {
   const paramsDescribe = {
-    logGroupName: decodeURIComponent(req.headers["log-group"]),
-    logStreamName: decodeURIComponent(req.headers["log-stream"]),
+    logGroupName: decodeURIComponent(req.headers['log-group']),
+    logStreamName: decodeURIComponent(req.headers['log-stream']),
   };
-  console.log(decodeURIComponent(req.headers["log-stream"]));
+  console.log(decodeURIComponent(req.headers['log-stream']));
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -136,7 +136,7 @@ logController.fetchLogs = (req, res, next) => {
       return next(err); // Pass the error to the Express error handler
     } else {
       try {
-        console.log("Inside fetching log stream data");
+        console.log('Inside fetching log stream data');
         const messages = data.events.map((event) => {
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
@@ -147,15 +147,15 @@ logController.fetchLogs = (req, res, next) => {
             try {
               messageObj = JSON.parse(match[0]);
             } catch (parseErr) {
-              console.error("Error parsing JSON", parseErr);
+              console.error('Error parsing JSON', parseErr);
               // Decide how to handle the parse error
             }
           }
 
           const parts = messageString
-            .replace(match && match[0], "")
+            .replace(match && match[0], '')
             .trim()
-            .split("\t");
+            .split('\t');
           return { Events: parts, LogEvent: messageObj };
         });
 
@@ -167,7 +167,5 @@ logController.fetchLogs = (req, res, next) => {
     }
   });
 };
-//   });
-// };
 
 module.exports = logController;
