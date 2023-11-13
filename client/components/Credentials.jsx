@@ -1,6 +1,7 @@
 //import React, { useState, useEffect } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../src/styles/Credentials.module.css';
 
 
 
@@ -37,7 +38,7 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
     ))
   ];
   return (
-    <div className='Head'>
+    <div className={styles.Head}>
       <h3>Enter Credentials</h3>
       <div>
         <form>
@@ -57,7 +58,11 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
         <select value={region} onChange={(e) => setRegion(e.target.value)}>
           {regionOptions}
         </select>
-        <Link to='/console'><button onClick={() => getLogGroups(accessKey, secretKey, region)}>submit</button></Link>
+        <Link to="/console">
+          <button onClick={() => getLogGroups(accessKey, secretKey, region)}>
+            Submit
+          </button>
+        </Link>
       </div>
     </div>
   );
