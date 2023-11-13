@@ -7,7 +7,9 @@ import styles from '../src/styles/Header.module.css';
 export default function Header() {
   return (
     <div className={styles.Head}>
-      <h3>Lambda Logger</h3>    
+      <img src="../src/images/ll-logo.png" alt="Logo" />
+      <h3>Lambda Logger</h3>
     </div>
+
   );
 }
