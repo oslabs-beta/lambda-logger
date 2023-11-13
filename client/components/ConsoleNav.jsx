@@ -49,14 +49,18 @@ export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGro
   };
 
   return (
-    <div>
-            Console Navbar
+    <div id="consoleNav">
+      Console Navbar
       <select value={selectedLogGroup} onChange={handleSelectChange}>
-        <option key="default" value="">Select a Log Group</option>
+        <option key="default" value="">
+          Select a Log Group
+        </option>
         {logGroupOptions}
       </select>
       <select value={selectedLogStream} onChange={handleSelectStreamChange}>
-        <option key="default" value="">Select a Log Stream</option>
+        <option key="default" value="">
+          Select a Log Stream
+        </option>
         {logStreamOptions}
       </select>
       <button onClick={handleThemeButtonClick}>{themeButton}</button>
