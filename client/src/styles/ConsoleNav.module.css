@@ -1,0 +1,38 @@
+.ConsoleNav {
+    display: flex;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #d8d8d8;
+    height: 35px;
+    padding-top: 80px;
+    padding-left: 1em;
+    background-color: rgb(43, 43, 43);
+}
+
+.ConsoleNav button {
+    width: 10em;
+    margin-left: 10px;
+    background-color: #484848;
+    color: #dadada;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.ConsoleNav button:hover {
+    background-color: #ff711f;
+}
+
+.ConsoleNav select {
+    box-sizing: border-box;
+    margin-left: 10px;
+    border: 1px solid #b5b5b5;
+    border-radius: 4px;
+    background-color: rgb(69, 69, 69);
+    color: #b0b0b0;
+    transition: border-color 0.3s;
+}
+
+.ConsoleNav select:focus {
+    border-color: #3498db;
+}

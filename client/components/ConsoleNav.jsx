@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../src/styles.css';
+import styles from '../src/styles/ConsoleNav.module.css';
 
 export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
   const [logGroupOptions, setLogGroupOptions] = useState([]);
@@ -49,8 +50,7 @@ export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGro
   };
 
   return (
-    <div id="consoleNav">
-      Console Navbar
+    <div className={styles.ConsoleNav}>
       <select value={selectedLogGroup} onChange={handleSelectChange}>
         <option key="default" value="">
           Select a Log Group
