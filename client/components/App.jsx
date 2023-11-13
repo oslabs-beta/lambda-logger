@@ -186,7 +186,7 @@ const App = () => {
         <Route path="/console" element=
           {
             <>
-              <ConsoleNav 
+              <ConsoleNav
                 getLogs={getLogs}
                 getLogStreams={getLogStreams}
                 logStreams={logStreams}
@@ -211,4 +211,13 @@ const App = () => {
 };
 
 
+
+
+
+
+
+
+
 export default App;
+
+
