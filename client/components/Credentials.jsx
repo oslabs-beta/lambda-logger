@@ -38,7 +38,7 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, getL
     ))
   ];
   return (
-    <div className={styles.Head}>
+    <div className={styles.Credentials}>
       <h3>Enter Credentials</h3>
       <div>
         <form>
