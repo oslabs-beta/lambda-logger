@@ -40,11 +40,14 @@ logController.fetchLogGroups = (req, res, next) => {
       console.log("Error", err);
       return next(err);
     } else {
-      const groupNames = data.logGroups.map((group) => {
-        return group.logGroupName;
-      });
-      console.log("Log Groups", groupNames);
-      res.locals.loggroups = groupNames;
+      const filteredGroupNames = data.logGroups
+        .filter(
+          (group) =>
+            group.logGroupName && group.logGroupName.startsWith("/aws/lambda")
+        )
+        .map((group) => group.logGroupName);
+      console.log("Log Groups", filteredGroupNames);
+      res.locals.loggroups = filteredGroupNames;
       return next();
     }
   });
@@ -96,9 +99,6 @@ logController.fetchLogStreams = (req, res, next) => {
 /********************* FETCH LOGS ***********************************************/
 
 logController.fetchLogs = (req, res, next) => {
-  // const logGroupName = decodeURIComponent(req.headers["log-group"]);
-  // const logStreamName = decodeURIComponent(req.headers["log-stream"]);
-
   // Access the headers instead of query parameters
   const accessKey = req.headers["access-key"];
   const secretKey = req.headers["secret-key"];
