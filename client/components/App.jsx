@@ -189,6 +189,7 @@ const App = () => {
               <ConsoleNav
                 getLogs={getLogs}
                 getLogStreams={getLogStreams}
+                getLogGroups={getLogGroups}
                 logStreams={logStreams}
                 setSelectedLogStream={setSelectedLogStream}
                 selectedLogStream={selectedLogStream}
