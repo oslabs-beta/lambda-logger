@@ -4,7 +4,7 @@
 import React from 'react';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
-import '../src/styles.css';
+import styles from '../src/styles/Console.module.css';
 
 export default function Console({
  jsonObject, theme, themeButton, handleThemeButtonClick,
@@ -19,7 +19,7 @@ stackoverflowLight
 */
 
   return (
-    <>
+    <div className={styles.Console}>
       {/* <h1>THE CONSOLE</h1> */}
       {/* <span>this is displaying from Console.jsx</span> */}
 
@@ -33,6 +33,6 @@ stackoverflowLight
       >
         {jsonString}
       </SyntaxHighlighter>
-    </>
+    </div>
   );
 }
