@@ -64,7 +64,7 @@ export default function ConsoleNav({ getLogGroups, handleThemeButtonClick, theme
         {logStreamOptions}
       </select>
       <button onClick={handleThemeButtonClick}>{themeButton}</button>
-      <button onClick={getLogGroups}>Refresh</button>
+      <button onClick={getLogGroups}>Get Latest Logs</button>
     </div>
   );
 }
