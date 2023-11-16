@@ -40,7 +40,7 @@ logController.fetchLogGroups = (req, res, next) => {
       console.log('Error', err);
       return next(err);
     } else {
-      const groupNames = data.logGroups.map((group) => {
+      const groupNames = data.logGroups.map(group => {
         return group.logGroupName;
       });
       console.log('Log Groups', groupNames);
@@ -83,7 +83,7 @@ logController.fetchLogStreams = (req, res, next) => {
         return next(new Error('No log streams found')); // Handle the case where there are no log streams
       }
       const streams = data.logStreams;
-      const streamnames = streams.map((stream) => {
+      const streamnames = streams.map(stream => {
         return stream.logStreamName;
       });
       console.log('streams pulled from API:', streamnames);
@@ -126,9 +126,18 @@ logController.fetchLogs = (req, res, next) => {
   //     }
   //     console.log("inside fetching logs");
 
+  const startDateTime = new Date('2023-11-07T00:00:00Z');
+  const endDateTime = new Date('2023-11-08T00:00:00Z');
+
+  const startTime = startDateTime.getTime();
+  const endTime = endDateTime.getTime();
+
   const paramsGet = {
     logGroupName: paramsDescribe.logGroupName,
     logStreamName: paramsDescribe.logStreamName,
+    startTime: startTime,
+    endTime: endTime,
+    limit: 500,
   };
 
   cloudWatchLogs.getLogEvents(paramsGet, function (err, data) {
@@ -137,7 +146,7 @@ logController.fetchLogs = (req, res, next) => {
     } else {
       try {
         console.log('Inside fetching log stream data');
-        const messages = data.events.map((event) => {
+        const messages = data.events.map(event => {
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
           const match = messageString.match(jsonRegex);
