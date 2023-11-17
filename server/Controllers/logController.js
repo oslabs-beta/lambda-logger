@@ -133,7 +133,7 @@ logController.fetchLogs = (req, res, next) => {
       return next(err); // Pass the error to the Express error handler
     } else {
       try {
-        console.log("Inside fetching filtered log data");
+        console.log("Inside fetching filtered log data:", data);
         const messages = data.events.map((event) => {
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;

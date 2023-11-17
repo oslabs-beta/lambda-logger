@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../src/styles.css';
 import styles from '../src/styles/ConsoleNav.module.css';
 
-export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
+export default function ConsoleNav({ getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
   const [logGroupOptions, setLogGroupOptions] = useState([]);
   const [logStreamOptions, setLogStreamOptions] = useState([]);
   console.log('selectedLog Group:', selectedLogGroup);
@@ -15,6 +15,7 @@ export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGro
       setLogGroupOptions(options);
     }
   }, [logGroups]);
+  
 
   useEffect(() => {
     if (logStreams && Array.isArray(logStreams)) {
@@ -25,27 +26,12 @@ export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGro
     }
   }, [logStreams]);
 
-  // useEffect(() => {
-  //     if (selectedLogGroup) {
-  //         getLogStreams();
-  //     }
-  // }, [selectedLogGroup, getLogStreams]);
-    
-  // useEffect(() => {
-  //     if (selectedLogStream) {
-  //         getLogs();
-  //     }
-  // }, [selectedLogStream, getLogs]);
 
   const handleSelectChange = (e) => {
     setSelectedLogGroup(e.target.value);
-    getLogStreams();
   };
   const handleSelectStreamChange = (e) => {
     setSelectedLogStream(e.target.value);
-    getLogs();
-    // setSelectedLogGroup(e.target.value);
-    // getLogStreams();
     console.log('selected log stream:', selectedLogStream);
   };
 
@@ -64,6 +50,10 @@ export default function ConsoleNav({ handleThemeButtonClick, themeButton, logGro
         {logStreamOptions}
       </select>
       <button onClick={handleThemeButtonClick}>{themeButton}</button>
+      <button onClick={() => {
+        getLogGroups();
+        getLogStreams();
+      }}>Refresh</button>
     </div>
   );
 }
