@@ -127,10 +127,9 @@ logController.fetchLogs = (req, res, next) => {
     // endTime: END_TIME, // EndTime in milliseconds
   };
 
-  // Use filterLogEvents instead of getLogEvents
   cloudWatchLogs.filterLogEvents(params, function (err, data) {
     if (err) {
-      return next(err); // Pass the error to the Express error handler
+      return next(err);
     } else {
       try {
         console.log("Inside fetching filtered log data:", data);
@@ -145,173 +144,69 @@ logController.fetchLogs = (req, res, next) => {
               messageObj = JSON.parse(match[0]);
             } catch (parseErr) {
               console.error("Error parsing JSON", parseErr);
-              // Decide how to handle the parse error
             }
           }
 
-          const parts = messageString
-            .replace(match && match[0], "")
-            .trim()
-            .split("\t");
-          return { Events: parts, LogEvent: messageObj };
+          const parsedLogEntry = parseLogEntry(messageString, match);
+
+          // Combine the parsed log entry with the JSON object, if present
+          const result = { ...parsedLogEntry };
+          if (messageObj !== null) {
+            result.Environment_Variables = messageObj;
+          }
+          return result;
         });
 
         res.locals.logs = messages;
         return next();
       } catch (e) {
-        return next(e); // Catch and pass any other errors that occur during processing
+        return next(e);
       }
     }
   });
+
+  // Helper function to parse various log entry formats
+  function parseLogEntry(logString, jsonMatch) {
+    logString = logString.trim();
+
+    if (logString.startsWith("2023")) {
+      // Standard Log Format
+      const parts = logString
+        .replace(jsonMatch && jsonMatch[0], "")
+        .split("\t")
+        .map((part) => part.trim());
+      return {
+        timestamp: parts[0],
+        id: parts[1],
+        level: parts[2],
+        message: parts[3],
+      };
+    } else if (
+      logString.startsWith("START") ||
+      logString.startsWith("INIT_START")
+    ) {
+      // START, INIT_START Formats
+      return parseKeyValuePairs(logString);
+    } else if (logString.startsWith("REPORT") || logString.startsWith("END")) {
+      // REPORT, END Formats
+      return parseKeyValuePairs(logString);
+    } else {
+      // Other Formats or Unrecognized Format
+      return { raw: logString };
+    }
+  }
+
+  function parseKeyValuePairs(logString) {
+    const obj = {};
+    const parts = logString.split("\t");
+    parts.forEach((part) => {
+      const [key, value] = part.split(":").map((s) => s.trim());
+      if (key && value) {
+        obj[key] = value;
+      }
+    });
+    return obj;
+  }
 };
-
-// logController.fetchLogs = (req, res, next) => {
-//   // ... Existing setup code ...
-//   const paramsDescribe = {
-//     logGroupName: decodeURIComponent(req.headers["log-group"]),
-//     logStreamName: decodeURIComponent(req.headers["log-stream"]),
-//   };
-//   console.log(decodeURIComponent(req.headers["log-stream"]));
-//   // Access the headers instead of query parameters
-//   const accessKey = req.headers["access-key"];
-//   const secretKey = req.headers["secret-key"];
-//   const region = req.headers["aws-region"];
-
-//   // Check if all necessary credentials are provided
-//   if (!accessKey || !secretKey || !region) {
-//     return next(new Error("Missing AWS credentials in headers"));
-//   }
-
-//   // Update the AWS config with the credentials from the headers
-//   AWS.config.update({
-//     accessKeyId: decodeURIComponent(accessKey),
-//     secretAccessKey: decodeURIComponent(secretKey),
-//     region: decodeURIComponent(region),
-//   });
-//   const cloudWatchLogs = new AWS.CloudWatchLogs();
-
-//   // Function to recursively fetch log events
-//   function fetchLogEvents(params, accumulatedData = []) {
-//     cloudWatchLogs.getLogEvents(params, function (err, data) {
-//       if (err) {
-//         return next(err); // Handle error
-//       }
-
-//       // Process and accumulate data
-//       const processedData = processLogEventsData(data);
-//       console.log("unprocessed data:", data); // You'll define this function
-//       accumulatedData = accumulatedData.concat(processedData);
-
-//       // Check for and handle pagination
-//       if (data.nextForwardToken && data.events.length) {
-//         // Update params with the next token and fetch next page
-//         const newParams = { ...params, nextToken: data.nextForwardToken };
-//         fetchLogEvents(newParams, accumulatedData);
-//       } else {
-//         console.log("accumulatedData:", accumulatedData);
-//         // Once all data is fetched, pass it forward
-//         res.locals.logs = accumulatedData;
-//         return next();
-//       }
-//     });
-//   }
-
-//   // Define a function to process log event data
-//   function processLogEventsData(data) {
-//     return data.events.map((event) => {
-//       const messageString = event.message;
-//       const jsonRegex = /\{[\s\S]*\}/;
-//       const match = messageString.match(jsonRegex);
-//       let messageObj = null;
-
-//       if (match) {
-//         try {
-//           messageObj = JSON.parse(match[0]);
-//         } catch (parseErr) {
-//           console.error("Error parsing JSON", parseErr);
-//         }
-//       }
-
-//       const parts = messageString
-//         .replace(match && match[0], "")
-//         .trim()
-//         .split("\t");
-//       return { Events: parts, LogEvent: messageObj };
-//     });
-//   }
-
-//   const paramsGet = {
-//     logGroupName: paramsDescribe.logGroupName,
-//     logStreamName: paramsDescribe.logStreamName,
-//   };
-
-//   fetchLogEvents(paramsGet);
-// };
-// ********************************************************
-// logController.fetchLogs = (req, res, next) => {
-//   const paramsDescribe = {
-//     logGroupName: decodeURIComponent(req.headers['log-group']),
-//     logStreamName: decodeURIComponent(req.headers['log-stream']),
-//   };
-//   console.log(decodeURIComponent(req.headers['log-stream']));
-//   // Access the headers instead of query parameters
-//   const accessKey = req.headers['access-key'];
-//   const secretKey = req.headers['secret-key'];
-//   const region = req.headers['aws-region'];
-
-//   // Check if all necessary credentials are provided
-//   if (!accessKey || !secretKey || !region) {
-//     return next(new Error('Missing AWS credentials in headers'));
-//   }
-
-//   // Update the AWS config with the credentials from the headers
-//   AWS.config.update({
-//     accessKeyId: decodeURIComponent(accessKey),
-//     secretAccessKey: decodeURIComponent(secretKey),
-//     region: decodeURIComponent(region),
-//   });
-//   const cloudWatchLogs = new AWS.CloudWatchLogs();
-
-//   const paramsGet = {
-//     logGroupName: paramsDescribe.logGroupName,
-//     logStreamName: paramsDescribe.logStreamName,
-//   };
-
-//   cloudWatchLogs.getLogEvents(paramsGet, function (err, data) {
-//     if (err) {
-//       return next(err); // Pass the error to the Express error handler
-//     } else {
-//       try {
-//         console.log('Inside fetching log stream data');
-//         const messages = data.events.map((event) => {
-//           const messageString = event.message;
-//           const jsonRegex = /\{[\s\S]*\}/;
-//           const match = messageString.match(jsonRegex);
-//           let messageObj = null;
-
-//           if (match) {
-//             try {
-//               messageObj = JSON.parse(match[0]);
-//             } catch (parseErr) {
-//               console.error('Error parsing JSON', parseErr);
-//               // Decide how to handle the parse error
-//             }
-//           }
-
-//           const parts = messageString
-//             .replace(match && match[0], '')
-//             .trim()
-//             .split('\t');
-//           return { Events: parts, LogEvent: messageObj };
-//         });
-
-//         res.locals.logs = messages;
-//         return next();
-//       } catch (e) {
-//         return next(e); // Catch and pass any other errors that occur during processing
-//       }
-//     }
-//   });
-// };
 
 module.exports = logController;
