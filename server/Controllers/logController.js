@@ -150,11 +150,10 @@ logController.fetchLogs = (req, res, next) => {
           const parsedLogEntry = parseLogEntry(messageString, match);
 
           // Combine the parsed log entry with the JSON object, if present
-          const result = { ...parsedLogEntry };
-          if (messageObj !== null) {
-            result.Environment_Variables = messageObj;
+          if (messageObj !== null && parsedLogEntry.message) {
+            parsedLogEntry[parsedLogEntry.message] = messageObj;
           }
-          return result;
+          return parsedLogEntry;
         });
 
         res.locals.logs = messages;
