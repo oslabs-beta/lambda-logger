@@ -1,13 +1,5 @@
 const AWS = require("aws-sdk");
 require("dotenv").config();
-// Configure AWS with your credentials and region
-// AWS.config.update({
-//   accessKeyId: process.env.ACCESS_KEY,
-//   secretAccessKey: process.env.SECRET_KEY,
-//   region: process.env.REGION,
-// });
-
-// Create a CloudWatchLogs client
 
 const logController = {};
 
