@@ -15,6 +15,7 @@ export default function ConsoleNav({ getLogGroups, handleThemeButtonClick, theme
       setLogGroupOptions(options);
     }
   }, [logGroups]);
+  
 
   useEffect(() => {
     if (logStreams && Array.isArray(logStreams)) {
@@ -25,27 +26,12 @@ export default function ConsoleNav({ getLogGroups, handleThemeButtonClick, theme
     }
   }, [logStreams]);
 
-  // useEffect(() => {
-  //     if (selectedLogGroup) {
-  //         getLogStreams();
-  //     }
-  // }, [selectedLogGroup, getLogStreams]);
-    
-  // useEffect(() => {
-  //     if (selectedLogStream) {
-  //         getLogs();
-  //     }
-  // }, [selectedLogStream, getLogs]);
 
   const handleSelectChange = (e) => {
     setSelectedLogGroup(e.target.value);
-    getLogStreams();
   };
   const handleSelectStreamChange = (e) => {
     setSelectedLogStream(e.target.value);
-    getLogs();
-    // setSelectedLogGroup(e.target.value);
-    // getLogStreams();
     console.log('selected log stream:', selectedLogStream);
   };
 

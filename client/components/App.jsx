@@ -28,13 +28,7 @@ const App = () => {
   /* ***************************** Fetch STREAMS State  ************************ */
 
   const getLogs = useCallback(async () => {
-    const queryParams = new URLSearchParams({
-      logGroup: encodeURIComponent(selectedLogGroup),
-      logStream: encodeURIComponent(selectedLogStream),
-      accessKey: encodeURIComponent(accessKey),
-      secretKey: encodeURIComponent(secretKey),
-      region: encodeURIComponent(region)
-    }).toString();
+
     const url = 'http://localhost:8080/logs';
 
     try {
@@ -105,22 +99,12 @@ const App = () => {
     }
   }, [selectedLogGroup, getLogStreams]);
 
-  // useEffect(() => {
-  //   const accKey = accessKey
-  //   const secKey = secretKey
-  //   const reg = region
-  //   getLogGroups(accKey, secKey, reg)
-  // }, []);
+ 
 
   /* ***************************** Fetch Log Streams State  ************************ */
 
   const getLogStreams = useCallback(async () => {
-    const queryParams = new URLSearchParams({
-      logGroup: encodeURIComponent(selectedLogGroup),
-      accessKey: encodeURIComponent(accessKey),
-      secretKey: encodeURIComponent(secretKey),
-      region: encodeURIComponent(region)
-    }).toString();
+ 
     const url = 'http://localhost:8080/logstreams';
 
     try {
@@ -149,12 +133,7 @@ const App = () => {
       getLogs();
     }
   }, [selectedLogStream, getLogs]);
-  // useEffect(() => {
-  //   const accKey = accessKey
-  //   const secKey = secretKey
-  //   const reg = region
-  //   getLogGroups(accKey, secKey, reg)
-  // }, []);
+  
 
   /* ******************** THEME BUTTON CLICK HANDLER  ******************* */
 
