@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react';
 import '../src/styles.css';
 import styles from '../src/styles/ConsoleNav.module.css';
 
-<<<<<<< HEAD
-export default function ConsoleNav({ getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
-=======
 export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
->>>>>>> 4c1298968ec396bbe6dd8cb4001ddafeb9b8db7a
+
   const [logGroupOptions, setLogGroupOptions] = useState([]);
   const [logStreamOptions, setLogStreamOptions] = useState([]);
   console.log('selectedLog Group:', selectedLogGroup);
