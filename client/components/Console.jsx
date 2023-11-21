@@ -7,16 +7,19 @@ import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json';
 import styles from '../src/styles/Console.module.css';
 
 export default function Console({
- jsonObject, theme, themeButton, handleThemeButtonClick,
+ jsonObject, theme, themeButton, handleThemeButtonClick, searchQuery
 }) {
   SyntaxHighlighter.registerLanguage('json', json);
-  const jsonString = JSON.stringify(jsonObject, null, 2);
 
-/* Favorite styles
-atomOneDark
-stackoverflowDark
-stackoverflowLight
-*/
+  const filteredJson = searchQuery
+      ? jsonObject.filter(item =>
+          JSON.stringify(item).toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : jsonObject;
+
+  const jsonString = JSON.stringify(filteredJson, null, 2);
+  
+
 
   return (
     <div className={styles.Console}>

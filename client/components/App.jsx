@@ -23,18 +23,13 @@ const App = () => {
   const [themeButton, setThemeButton] = useState('Light Mode');
   const [selectedLogGroup, setSelectedLogGroup] = useState('');
   const [selectedLogStream, setSelectedLogStream] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
 
 
   /* ***************************** Fetch STREAMS State  ************************ */
 
   const getLogs = useCallback(async () => {
-    const queryParams = new URLSearchParams({
-      logGroup: encodeURIComponent(selectedLogGroup),
-      logStream: encodeURIComponent(selectedLogStream),
-      accessKey: encodeURIComponent(accessKey),
-      secretKey: encodeURIComponent(secretKey),
-      region: encodeURIComponent(region)
-    }).toString();
+
     const url = 'http://localhost:8080/logs';
 
     try {
@@ -105,22 +100,12 @@ const App = () => {
     }
   }, [selectedLogGroup, getLogStreams]);
 
-  // useEffect(() => {
-  //   const accKey = accessKey
-  //   const secKey = secretKey
-  //   const reg = region
-  //   getLogGroups(accKey, secKey, reg)
-  // }, []);
+ 
 
   /* ***************************** Fetch Log Streams State  ************************ */
 
   const getLogStreams = useCallback(async () => {
-    const queryParams = new URLSearchParams({
-      logGroup: encodeURIComponent(selectedLogGroup),
-      accessKey: encodeURIComponent(accessKey),
-      secretKey: encodeURIComponent(secretKey),
-      region: encodeURIComponent(region)
-    }).toString();
+ 
     const url = 'http://localhost:8080/logstreams';
 
     try {
@@ -149,12 +134,7 @@ const App = () => {
       getLogs();
     }
   }, [selectedLogStream, getLogs]);
-  // useEffect(() => {
-  //   const accKey = accessKey
-  //   const secKey = secretKey
-  //   const reg = region
-  //   getLogGroups(accKey, secKey, reg)
-  // }, []);
+  
 
   /* ******************** THEME BUTTON CLICK HANDLER  ******************* */
 
@@ -163,6 +143,13 @@ const App = () => {
       ? (setTheme(stackoverflowLight), setThemeButton('Dark Mode')) 
       : (setTheme(stackoverflowDark), setThemeButton('Light Mode'));
   };
+
+  /* ******************** SEARCH QUERY HANDLER  ******************* */
+  
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
 
   return (
     <Router>
@@ -198,8 +185,11 @@ const App = () => {
                 handleThemeButtonClick={handleThemeButtonClick} 
                 themeButton={themeButton}
                 logGroups={logGroups}
+                searchQuery={searchQuery}
+                handleSearchChange={handleSearchChange}
               />
               <Console
+                searchQuery={searchQuery}
                 jsonObject={stream}
                 theme={theme}
               />
