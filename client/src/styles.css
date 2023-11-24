@@ -1,4 +1,13 @@
 /* This does not work yet:  */
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
   background-color: rgb(40, 42, 45);
   margin: 0;

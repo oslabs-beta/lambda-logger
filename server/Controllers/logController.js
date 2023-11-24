@@ -1,13 +1,5 @@
-const AWS = require('aws-sdk');
-require('dotenv').config();
-// Configure AWS with your credentials and region
-// AWS.config.update({
-//   accessKeyId: process.env.ACCESS_KEY,
-//   secretAccessKey: process.env.SECRET_KEY,
-//   region: process.env.REGION,
-// });
-
-// Create a CloudWatchLogs client
+const AWS = require("aws-sdk");
+require("dotenv").config();
 
 const logController = {};
 
@@ -40,11 +32,19 @@ logController.fetchLogGroups = (req, res, next) => {
       console.log('Error', err);
       return next(err);
     } else {
-      const groupNames = data.logGroups.map((group) => {
+      const groupNames = data.logGroups.map(group => {
         return group.logGroupName;
       });
       console.log('Log Groups', groupNames);
       res.locals.loggroups = groupNames;
+      const filteredGroupNames = data.logGroups
+        .filter(
+          group =>
+            group.logGroupName && group.logGroupName.startsWith('/aws/lambda'),
+        )
+        .map(group => group.logGroupName);
+      console.log('Log Groups', filteredGroupNames);
+      res.locals.loggroups = filteredGroupNames;
       return next();
     }
   });
@@ -82,8 +82,9 @@ logController.fetchLogStreams = (req, res, next) => {
       if (!data.logStreams || data.logStreams.length === 0) {
         return next(new Error('No log streams found')); // Handle the case where there are no log streams
       }
+      console.log('streams data:', data);
       const streams = data.logStreams;
-      const streamnames = streams.map((stream) => {
+      const streamnames = streams.map(stream => {
         return stream.logStreamName;
       });
       console.log('streams pulled from API:', streamnames);
@@ -95,11 +96,6 @@ logController.fetchLogStreams = (req, res, next) => {
 /********************* FETCH LOGS ***********************************************/
 
 logController.fetchLogs = (req, res, next) => {
-  const paramsDescribe = {
-    logGroupName: decodeURIComponent(req.headers['log-group']),
-    logStreamName: decodeURIComponent(req.headers['log-stream']),
-  };
-  console.log(decodeURIComponent(req.headers['log-stream']));
   // Access the headers instead of query parameters
   const accessKey = req.headers['access-key'];
   const secretKey = req.headers['secret-key'];
@@ -117,27 +113,25 @@ logController.fetchLogs = (req, res, next) => {
     region: decodeURIComponent(region),
   });
   const cloudWatchLogs = new AWS.CloudWatchLogs();
-  // cloudWatchLogs.describeLogStreams(paramsDescribe, function (err, data) {
-  //   if (err) {
-  //     return next(err); // Pass the error to the Express error handler
-  //   } else {
-  //     if (!data.logStreams || data.logStreams.length === 0) {
-  //       return next(new Error("No log streams found")); // Handle the case where there are no log streams
-  //     }
-  //     console.log("inside fetching logs");
 
-  const paramsGet = {
-    logGroupName: paramsDescribe.logGroupName,
-    logStreamName: paramsDescribe.logStreamName,
+  // Define parameters for filterLogEvents
+  const params = {
+    logGroupName: decodeURIComponent(req.headers['log-group']),
+    logStreamNames: [decodeURIComponent(req.headers['log-stream'])],
+    // Optionally, specify a filter pattern and time range
+    // filterPattern: '', // Define a filter pattern if needed
+    // startTime: START_TIME, // StartTime in milliseconds
+    // endTime: END_TIME, // EndTime in milliseconds
   };
 
-  cloudWatchLogs.getLogEvents(paramsGet, function (err, data) {
+  cloudWatchLogs.filterLogEvents(params, function (err, data) {
     if (err) {
-      return next(err); // Pass the error to the Express error handler
+      return next(err);
     } else {
       try {
         console.log('Inside fetching log stream data');
-        const messages = data.events.map((event) => {
+        const messages = data.events.map(event => {
+          console.log('Inside fetching filtered log data:', data);
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
           const match = messageString.match(jsonRegex);
@@ -148,24 +142,68 @@ logController.fetchLogs = (req, res, next) => {
               messageObj = JSON.parse(match[0]);
             } catch (parseErr) {
               console.error('Error parsing JSON', parseErr);
-              // Decide how to handle the parse error
             }
           }
 
-          const parts = messageString
-            .replace(match && match[0], '')
-            .trim()
-            .split('\t');
-          return { Events: parts, LogEvent: messageObj };
+          const parsedLogEntry = parseLogEntry(messageString, match);
+
+          // Combine the parsed log entry with the JSON object, if present
+          if (messageObj !== null && parsedLogEntry.message) {
+            parsedLogEntry[parsedLogEntry.message] = messageObj;
+          }
+          return parsedLogEntry;
         });
 
         res.locals.logs = messages;
         return next();
       } catch (e) {
-        return next(e); // Catch and pass any other errors that occur during processing
+        return next(e);
       }
     }
   });
+
+  // Helper function to parse various log entry formats
+  function parseLogEntry(logString, jsonMatch) {
+    logString = logString.trim();
+
+    if (logString.startsWith('2023')) {
+      // Standard Log Format
+      const parts = logString
+        .replace(jsonMatch && jsonMatch[0], '')
+        .split('\t')
+        .map(part => part.trim());
+      return {
+        timestamp: parts[0],
+        id: parts[1],
+        level: parts[2],
+        message: parts[3],
+      };
+    } else if (
+      logString.startsWith('START') ||
+      logString.startsWith('INIT_START')
+    ) {
+      // START, INIT_START Formats
+      return parseKeyValuePairs(logString);
+    } else if (logString.startsWith('REPORT') || logString.startsWith('END')) {
+      // REPORT, END Formats
+      return parseKeyValuePairs(logString);
+    } else {
+      // Other Formats or Unrecognized Format
+      return { raw: logString };
+    }
+  }
+
+  function parseKeyValuePairs(logString) {
+    const obj = {};
+    const parts = logString.split('\t');
+    parts.forEach(part => {
+      const [key, value] = part.split(':').map(s => s.trim());
+      if (key && value) {
+        obj[key] = value;
+      }
+    });
+    return obj;
+  }
 };
 
 module.exports = logController;
