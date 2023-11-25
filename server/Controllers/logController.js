@@ -49,7 +49,7 @@ logController.fetchLogGroups = (req, res, next) => {
       return next();
     }
   });
-  res.locals.loggroups = [{}, {}];
+  //res.locals.loggroups = [{}, {}];
   return next();
 };
 
