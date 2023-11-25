@@ -50,7 +50,7 @@ logController.fetchLogGroups = (req, res, next) => {
     }
   });
   //res.locals.loggroups = [{}, {}];
-  return next();
+  // return next();
 };
 
 /********************* FETCH LOG STREAMS ***********************************************/
