@@ -1,5 +1,5 @@
-const AWS = require("aws-sdk");
-require("dotenv").config();
+const AWS = require('aws-sdk');
+require('dotenv').config();
 
 const logController = {};
 
@@ -35,8 +35,6 @@ logController.fetchLogGroups = (req, res, next) => {
       const groupNames = data.logGroups.map(group => {
         return group.logGroupName;
       });
-      console.log('Log Groups', groupNames);
-      res.locals.loggroups = groupNames;
       const filteredGroupNames = data.logGroups
         .filter(
           group =>
@@ -118,10 +116,6 @@ logController.fetchLogs = (req, res, next) => {
   const params = {
     logGroupName: decodeURIComponent(req.headers['log-group']),
     logStreamNames: [decodeURIComponent(req.headers['log-stream'])],
-    // Optionally, specify a filter pattern and time range
-    // filterPattern: '', // Define a filter pattern if needed
-    // startTime: START_TIME, // StartTime in milliseconds
-    // endTime: END_TIME, // EndTime in milliseconds
   };
 
   cloudWatchLogs.filterLogEvents(params, function (err, data) {
