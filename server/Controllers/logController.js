@@ -35,8 +35,6 @@ logController.fetchLogGroups = (req, res, next) => {
       const groupNames = data.logGroups.map(group => {
         return group.logGroupName;
       });
-      console.log('Log Groups', groupNames);
-      res.locals.loggroups = groupNames;
       const filteredGroupNames = data.logGroups
         .filter(
           group =>
