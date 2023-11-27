@@ -67,21 +67,5 @@ describe('\n Server Route Tests \n', () => {
       const response = await request(server).get('/loggroups');
       expect(response.headers['content-type']).toContain('application/json');
     })
-
-
-
-
-
-
-    // test for incorrect credentials
-      // AWS should respond with status code 400
-      // LL Server should send status code 400 to front end with message
-      // "invalid credentials"
-
-
-    // test if a region was selected
-      // expect an array returned from LL server
-
-
   })
 });

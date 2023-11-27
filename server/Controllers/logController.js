@@ -35,9 +35,6 @@ logController.fetchLogGroups = (req, res, next) => {
       const groupNames = data.logGroups.map(group => {
         return group.logGroupName;
       });
-      console.log(data);
-      console.log('Log Groups', groupNames);
-      res.locals.loggroups = groupNames;
       const filteredGroupNames = data.logGroups
         .filter(
           group =>
@@ -49,8 +46,6 @@ logController.fetchLogGroups = (req, res, next) => {
       return next();
     }
   });
-  //res.locals.loggroups = [{}, {}];
-  // return next();
 };
 
 /********************* FETCH LOG STREAMS ***********************************************/
