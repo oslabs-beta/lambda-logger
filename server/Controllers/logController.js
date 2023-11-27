@@ -51,7 +51,6 @@ logController.fetchLogGroups = (req, res, next) => {
 /********************* FETCH LOG STREAMS ***********************************************/
 
 logController.fetchLogStreams = (req, res, next) => {
-  console.log('inside fetch streams,');
   const paramsDescribe = {
     logGroupName: decodeURIComponent(req.headers['log-group']),
   };
