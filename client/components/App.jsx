@@ -10,6 +10,7 @@ import useLogGroups from '../hooks/useLogGroups';
 import useLogStreams from '../hooks/useLogStreams';
 import useLogs from '../hooks/useLogs';
 import useThemeButton from '../hooks/useThemeButton.js';
+import useSearch from '../hooks/useSearch.js';
 
 const App = () => {
 
@@ -36,17 +37,15 @@ const App = () => {
     fetchLogStreams,
   } = useLogStreams(accessKey, secretKey, region, selectedLogGroup);
 
-  /*********************** Custom Hook for Logs fetch and state  ***************************/
+  /*********************** Custom Hook for Logs fetch and state  ***********************************/
 
   const {
     logs,
-    searchQuery,
-    setSearchQuery,
     fetchLogs,
   } = useLogs(accessKey, secretKey, region, selectedLogGroup, selectedLogStream);
  
 
-  /* ******************** THEME BUTTON CLICK HANDLER  ******************* */
+  /* ******************** THEME BUTTON CLICK HANDLER  *********************************************/
 
   const {
     theme,
@@ -56,9 +55,11 @@ const App = () => {
 
   /* ******************** SEARCH QUERY HANDLER  ******************* */
   
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
-  };
+  const {
+    jsonString,
+    searchQuery,
+    handleSearchChange
+  } = useSearch(logs);
 
 
   return (
@@ -99,8 +100,7 @@ const App = () => {
                 handleSearchChange={handleSearchChange}
               />
               <Console
-                searchQuery={searchQuery}
-                jsonObject={logs}
+                jsonString={jsonString}
                 theme={theme}
               />
             </>

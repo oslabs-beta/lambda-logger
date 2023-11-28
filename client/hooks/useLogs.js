@@ -9,8 +9,6 @@ function useLogs(
   selectedLogStream
 ) {
   const [logs, setLogs] = useState("NO LOGS REQUESTED YET");
-  const [searchQuery, setSearchQuery] = useState("");
-
   const fetchLogs = useCallback(async () => {
     const url = "http://localhost:8080/logs";
 
@@ -41,8 +39,6 @@ function useLogs(
 
   return {
     logs,
-    searchQuery,
-    setSearchQuery,
     fetchLogs,
   };
 }

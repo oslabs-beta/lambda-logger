@@ -1,39 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import '../src/styles.css';
 import styles from '../src/styles/ConsoleNav.module.css';
+import useLogGroupOptions from "../hooks/useLogGroupOptions"
+import useLogStreamOptions from "../hooks/useLogStreamOptions"
+import useSelectStream from "../hooks/useSelectStream"
+import useSelectGroup from "../hooks/useSelectGroup"
 
 export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
-  const [logGroupOptions, setLogGroupOptions] = useState([]);
-  const [logStreamOptions, setLogStreamOptions] = useState([]);
-  console.log('selectedLog Group:', selectedLogGroup);
-  console.log('selectedLog Stream:', selectedLogStream);
-  useEffect(() => {
-    if (logGroups && Array.isArray(logGroups)) {
-      const options = logGroups.map((logGroup, index) => (
-        <option key={index} value={logGroup}>{logGroup}</option>
-      ));
-      setLogGroupOptions(options);
-    }
-  }, [logGroups]);
-  
 
-  useEffect(() => {
-    if (logStreams && Array.isArray(logStreams)) {
-      const options = logStreams.map((logStream, index) => (
-        <option key={index} value={logStream}>{logStream}</option>
-      ));
-      setLogStreamOptions(options);
-    }
-  }, [logStreams]);
-
-
-  const handleSelectChange = (e) => {
-    setSelectedLogGroup(e.target.value);
-  };
-  const handleSelectStreamChange = (e) => {
-    setSelectedLogStream(e.target.value);
-    console.log('selected log stream:', selectedLogStream);
-  };
+  const { logGroupOptions } = useLogGroupOptions(logGroups);
+  const { logStreamOptions } = useLogStreamOptions(logStreams);
+  const { handleSelectStreamChange } = useSelectStream(setSelectedLogStream);
+  const { handleSelectChange } = useSelectGroup(setSelectedLogGroup);
 
   return (
     <div className={styles.ConsoleNav}>
