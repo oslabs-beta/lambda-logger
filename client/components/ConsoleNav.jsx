@@ -6,7 +6,8 @@ import useLogStreamOptions from "../hooks/useLogStreamOptions"
 import useSelectStream from "../hooks/useSelectStream"
 import useSelectGroup from "../hooks/useSelectGroup"
 
-export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, getLogs}) {
+
+export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, setLogs}) {
 
   const { logGroupOptions } = useLogGroupOptions(logGroups);
   const { logStreamOptions } = useLogStreamOptions(logStreams);
@@ -37,7 +38,8 @@ export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGrou
       <button onClick={() => {
         getLogGroups();
         getLogStreams();
-      }}>Refresh</button>
+        setLogs("LATEST LOGS LOADED FROM CLOUDWATCH, PLEASE SELECT NEW LOGS TO VIEW");
+      }}>Get Latest Logs</button>
     </div>
   );
 }

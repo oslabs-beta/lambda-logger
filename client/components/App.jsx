@@ -42,6 +42,7 @@ const App = () => {
   const {
     logs,
     fetchLogs,
+    setLogs,
   } = useLogs(accessKey, secretKey, region, selectedLogGroup, selectedLogStream);
  
 
@@ -98,6 +99,7 @@ const App = () => {
                 logGroups={logGroups}
                 searchQuery={searchQuery}
                 handleSearchChange={handleSearchChange}
+                setLogs={setLogs}
               />
               <Console
                 jsonString={jsonString}
