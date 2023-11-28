@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/build', express.static(path.resolve(__dirname, '../build')));
+app.use('/credentials', express.static(path.resolve(__dirname, '../build')));
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));

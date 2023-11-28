@@ -67,7 +67,7 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element=
+        <Route path="/credentials" element=
           {
             <Credentials
               setAccessKey={setAccessKey}
