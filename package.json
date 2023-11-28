@@ -1,13 +1,13 @@
 {
-  "name": "devreads",
+  "name": "Lambda-Logger",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: run one test!! ",
     "start": "node server/server.js",
     "dev": "nodemon server/server.js & webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

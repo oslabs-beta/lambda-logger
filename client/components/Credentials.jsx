@@ -2,41 +2,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../src/styles/Credentials.module.css';
-
+import useRegions from '../hooks/useRegions';
 
 
 export default function Credentials({setAccessKey, setSecretKey, setRegion, getLogs, accessKey, secretKey, region, getLogGroups}) {
-  const regions = [
-    'us-east-1', 
-    'us-east-2',
-    'us-west-1',
-    'us-west-2',
-    'ap-south-1',
-    'ap-northeast-3',
-    'ap-northeast-2',
-    'ap-northeast-1',
-    'ap-southeast-2',
-    'ap-southeast-1',
-    'ca-central-1',
-    'eu-central-1',
-    'eu-west-1',
-    'eu-west-2',
-    'eu-west-3',
-    'eu-north-1',
-    'sa-south-1'
-  ];
-  
-  // const regionOptions = regions.map((region, index) => {
-  //   return (<option key={index} value={region}>{region}</option>)
-  // })
-  
-  const regionOptions = [
-    // Adding a default option with a value that is not in the list
-    <option key="default" value="">Select a Region</option>,
-    ...regions.map((region, index) => (
-      <option key={index} value={region}>{region}</option>
-    ))
-  ];
+
+  const { regionOptions } = useRegions();
+
   return (
     <div className={styles.Credentials}>
       <h3>Enter Credentials</h3>

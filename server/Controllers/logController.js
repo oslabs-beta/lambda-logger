@@ -27,11 +27,13 @@ logController.fetchLogGroups = (req, res, next) => {
   });
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
-    console.log("inside Describe Log Groups");
     if (err) {
       console.log("Error", err);
       return next(err);
     } else {
+      const groupNames = data.logGroups.map((group) => {
+        return group.logGroupName;
+      });
       const filteredGroupNames = data.logGroups
         .filter(
           (group) =>
@@ -124,8 +126,9 @@ logController.fetchLogs = (req, res, next) => {
       return next(err);
     } else {
       try {
-        console.log("Inside fetching filtered log data:", data);
+        console.log("Inside fetching log stream data");
         const messages = data.events.map((event) => {
+          console.log("Inside fetching filtered log data:", data);
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
           const match = messageString.match(jsonRegex);

@@ -50,4 +50,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log('The server is listening on port 3000'));
+const server = app.listen(PORT, () => console.log(`The server is listening on port ${PORT}`));
+
+module.exports = server;
+
+
