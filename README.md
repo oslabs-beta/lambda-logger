@@ -1,8 +1,8 @@
 # Lambda-logger
 Lambda Logger tackles post-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible return values. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
 <p align="center">
-  <img src="./docs/assets/images/minLogo.png" />
-  </p>
+  <img src="./docs/assets/images/minLogo.png" width="50%" />
+</p>
 
 ## Table of Contents
 1. [Features]()
@@ -34,7 +34,11 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 ![](./docs/assets/images/consoleContent.png)
 
 ## Documentation
-- How AWS SDK Is Implemented
+- How AWS SDK Is Implemented?
+    - A software development kit (SDK) is a set of platform-specific building tools for developers. You require components like debuggers, compilers, and libraries to create code that runs on a specific platform, operating system, or programming language. SDKs put everything you need to develop and run software in one place. Additionally, they contain resources like documentation, tutorials, and guides as well as APIs and frameworks for faster application development.
+    - We use The AWS SDK for JavaScript v3 API Reference Guide which provides a JavaScript API for AWS services. Particularly in this project, our team "AWS-SDK" to fetch data from CloudWatch.
+    - For more info, click [here](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html).
+
 - React Syntax Highlighter
 
 ## Roadmap
