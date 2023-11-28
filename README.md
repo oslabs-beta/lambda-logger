@@ -1,14 +1,14 @@
 # Lambda-logger
 Lambda Logger tackles post-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible return values. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
 <p align="center">
-  <img src="./docs/assets/images/minLogo.png" width="50%" />
+  <img src="./docs/assets/images/minLogo.png" width="30%" />
 </p>
 
 ## Table of Contents
 1. [Features](#features)
 2. [Instruction](#instruction)
 3. [Documentation](#documentation)
-4. [Contributing](#contributing)
+4. [OSP Information](#osp-information)
 5. [Contributors](#contributors)
 
 ## Features
@@ -51,7 +51,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 ## OSP Information
 ### Testing
 - How to test? Before testing, if you are in the server(after hitting `npm run dev`), exit the server(on the keyboard, press the combination "Control + C").
-- **Note:** To ensure there is no bug/confliction, double check by running `lsof i:3000` on the terminal, if it still exists, you may see its PPID on your terminal, and you have to kill it(`kill -9 <PPID number>`) before do testing.
+- **Note:** To ensure there is no bug/confliction, double check by running `lsof -i:3000` on the terminal, if it still exists, you may see its "PID" on your terminal, and you have to kill it(`kill -9 <PID>`) before do testing.
     - Run `npm run test` to test the whole app.
     - Run `npm run test <filename.js>` to test only that file.
 ### Roadmap
@@ -69,7 +69,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 - ⏳ = In-Progress
 - ⚡️ = Backlog
 
-## Contributing
+### Contributing
 - Potential iteration ideas
 - What needs to be improved (code-wise)
     - Anything from the backlog
@@ -84,7 +84,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/128096173?v=4" width="140px;" alt=""/>
       <br />
-      <sub><b>Conrad Preston</b></sub>
+        <sub><b>Conrad Preston</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/conrad-preston-aaaa9b252/">🖇️</a>
       <a href="https://github.com/Conrady82">🐙</a>
@@ -92,7 +92,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/144387822?s=400&u=8cb84bdf130e87fef7cb92283af412d82594be20&v=4" width="140px;" alt=""/>
       <br />
-      <sub><b>Hoang Dang</b></sub>
+        <sub><b>Hoang Dang</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/hoang-dang-b884b4296/">🖇️</a>
       <a href="https://github.com/hoangdang91768">🐙</a>
@@ -100,7 +100,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/53544649?v=4" width="140px;" alt=""/>
       <br />
-      <sub><b>Luke Clarkson</b></sub>
+        <sub><b>Luke Clarkson</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/ljclarkson/">🖇️</a>
       <a href="https://github.com/LClarkson">🐙</a>
@@ -108,7 +108,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     <td align="center">
       <img src="https://avatars.githubusercontent.com/u/138337584?v=4" width="140px;" alt=""/>
       <br />
-      <sub><b>Nick C. Mason</b></sub>
+        <sub><b>Nick C. Mason</b></sub>
       <br />
       <a href="https://www.linkedin.com/in/nickmasonswe/">🖇️</a>
       <a href="https://github.com/nickmasonswe">🐙</a>
