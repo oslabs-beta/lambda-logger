@@ -6,7 +6,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 
 ## Table of Contents
 1. [Features](#features)
-2. [Getting Started Guide](#getting-started-guide)
+2. [Instruction](#instruction)
 3. [Documentation](#documentation)
 4. [Contributing](#contributing)
 5. [Contributors](#contributors)
@@ -16,26 +16,26 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 - 
 - 
 
-## Getting Started Guide
-- From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied url'`
-- How to get access-key and secret-key to log in?
-    - From your AWS root account, you should have your own "IAM" user in your AWS account. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to know how to create.
-    - After got "IAM user", in your AWS Console, at search bar, search for `IAM`. Go to `Users` tab, then choose your <yourIAMuser> that you just create. In Summary, click `Create access key` --> choose `Local code` --> Check `I understand` box --> click `Next` --> In `Description tag value`, put any name you want to --> click `Create access key`
+## Instruction
+- From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
+- How to get the "access key" and "secret key" to log in?
+    - From your AWS root account, you should have your own "IAM" user in your AWS account. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
+    - After getting "IAM user", in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. In Summary, click `Create access key` --> choose `Local code` --> Check `I understand` box --> click `Next` --> In `Description tag value`, put any name you want to --> click `Create access key`
 
     - ![](./docs/assets/images/get-access-key.gif)
 
-    - Now you should save `Secret access key` in somewhere(**Note:** this key are very sensitive, do NOT publish), or click on `Download .csv file` before click `Done`. If you forget this step, the "Secret key access" would be gone, unless you create a new one.
+    - Now you should save the `Secret access key` somewhere(**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you never get that "Secret key access" anymore, unless you create a new one.
 
-    - **Note:** You only can create up to 2 "Access key". If you want to create another one, you must delete the old one.
-    - After get keys, get the region 
+    - **Note:** You only can create up to "2 Access keys". If you want to create another one, you must delete the old one.
+    - After getting the keys, get the region 
     ![](./docs/assets/images/region.png)
 
-- Since we have all stuff to log in, on the terminal run `npm install`, then `npm run dev`, navigate to http://localhost:8080/ to view web application, and use both keys and region to access.
+- Since we have all stuff to log in, on the terminal run `npm install`, then `npm run dev`, navigate to http://localhost:8080/ to view the web application, and use both keys and region to access.
     ![](./docs/assets/images/homepage.png)
 
 - Nav Bar Overview (Dropdowns, Search, Theme)
 ![](./docs/assets/images/consolePage.png)
-- Select Log group and Log Stream you want to access from your "Lambda function", then you will get content looks like this:
+- Select the Log group and Log Stream you want to access from your "Lambda function", then you will get content that looks like this:
 ![](./docs/assets/images/consoleContent.png)
 
 ## Documentation
@@ -48,16 +48,22 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     - Syntax highlighting component for `React`` using the seriously super amazing [lowlight](https://github.com/wooorm/lowlight) and [refractor](https://github.com/wooorm/refractor) by [wooorm](https://github.com/wooorm).
     - Click [here](https://www.npmjs.com/package/react-syntax-highlighter) for more information.
 
-## Roadmap
+## OSP Information
+### Testing
+- How to test? Before testing, if you are in the server(after hitting `npm run dev`), exit the server(on the keyboard, press the combination "Control + C").
+- **Note:** To ensure there is no bug/confliction, double check by running `lsof i:3000` on the terminal, if it still exists, you may see its PPID on your terminal, and you have to kill it(`kill -9 <PPID number>`) before do testing.
+    - Run `npm run test` to test the whole app.
+    - Run `npm run test <filename.js>` to test only that file.
+### Roadmap
 | Feature                                          | Status |
 | ------------------------------------------------ | ------ |
-| Dynamiccally Fetch Logs and Stream From CloudWatch                                         | ✅     |
+| Dynamically Fetch Logs and Stream From CloudWatch                                         | ✅     |
 | Back-end Testing                                 | ✅     |
 | Dark/Light Mode                                  | ✅     |
 | Increase Testing Coverage                        | ⏳     |
-| Make Stream Content linkable                      | ⚡️      |
-| Adding more themes                                | ⚡️      |
-| Improving search                               | ⚡️      |
+| Make Stream Content linkable                     | ⚡️      |
+| Adding more themes                               | ⚡️      |
+| Improving search                                 | ⚡️      |
 
 - ✅ = Completed
 - ⏳ = In-Progress
@@ -67,8 +73,8 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 - Potential iteration ideas
 - What needs to be improved (code-wise)
     - Anything from the backlog
-    - Add additional front end tests
-    - Add additional back end tests
+    - Add additional front-end tests
+    - Add additional back-end tests
     - Migrate to AWS SDK 3
 
 ## Contributors
@@ -104,7 +110,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
       <br />
       <sub><b>Nick C. Mason</b></sub>
       <br />
-      <a href="">🖇️</a>
+      <a href="https://www.linkedin.com/in/nickmasonswe/">🖇️</a>
       <a href="https://github.com/nickmasonswe">🐙</a>
     </td>
   </tr>
