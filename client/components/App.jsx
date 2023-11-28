@@ -1,148 +1,58 @@
 import React from 'react';
-import {useState, useEffect, useCallback} from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx';
 import Console from './Console.jsx';
 import '../src/styles.css';
-import { stackoverflowDark, stackoverflowLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import Credentials from './Credentials.jsx';
 import ConsoleNav from './ConsoleNav.jsx';
-
+import useLogGroups from '../hooks/useLogGroups';
+import useLogStreams from '../hooks/useLogStreams';
+import useLogs from '../hooks/useLogs';
+import useThemeButton from '../hooks/useThemeButton.js';
 
 const App = () => {
 
-  /*********************** Initialize State for Entry Point  ***************************/
+  /*********************** Initialize State for Credentials  ***************************/
   const [accessKey, setAccessKey] = useState('');
   const [secretKey, setSecretKey] = useState('');
   const [region, setRegion] = useState('');
-  const [logGroups, setLogGroups] = useState('');
-  const [stream, setStream] = useState('NO LOGS REQUESTED YET');
-  const [logStreams, setLogStreams] = useState('');
-  // theme choosing
-  const [theme, setTheme] = useState(stackoverflowDark);
-  const [themeButton, setThemeButton] = useState('Light Mode');
-  const [selectedLogGroup, setSelectedLogGroup] = useState('');
-  const [selectedLogStream, setSelectedLogStream] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
 
+  /*********************** Custom Hook for Log Groups fetch and state  ***************************/
 
-  /* ***************************** Fetch STREAMS State  ************************ */
+  const {
+    logGroups,
+    selectedLogGroup,
+    setSelectedLogGroup,
+    fetchLogGroups,
+  } = useLogGroups(accessKey, secretKey, region);
 
-  const getLogs = useCallback(async () => {
+  /*********************** Custom Hook for Log Streams fetch and state  ***************************/
 
-    const url = 'http://localhost:8080/logs';
+  const {
+    logStreams,
+    selectedLogStream,
+    setSelectedLogStream,
+    fetchLogStreams,
+  } = useLogStreams(accessKey, secretKey, region, selectedLogGroup);
 
-    try {
-      const response = await fetch(url, {
-        method: 'GET', // Assuming the endpoint is expecting a GET request
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Key': encodeURIComponent(accessKey),
-          'Secret-Key': encodeURIComponent(secretKey),
-          'AWS-Region': encodeURIComponent(region),
-          'Log-Group': encodeURIComponent(selectedLogGroup),
-          'Log-Stream': encodeURIComponent(selectedLogStream)
-        }
-      });
-      console.log('in use Effect');
-      const data = await response.json();
-      setStream(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [selectedLogGroup, selectedLogStream, accessKey, secretKey, region]);
+  /*********************** Custom Hook for Logs fetch and state  ***************************/
 
-  useEffect(() => {
-    if (accessKey && secretKey && region) {
-      getLogGroups();
-    }
-  }, [getLogGroups, accessKey, secretKey, region]);
-
-  // useEffect(() => {
-  //   const accKey = accessKey
-  //   const secKey = secretKey
-  //   const reg = region
-  //   getLogs(accKey, secKey, reg)
-  // }, []);
-
-  /* ***************************** Fetch Log Groups State  ************************ */
-
-  const getLogGroups = useCallback(async () => {
-    const queryParams = new URLSearchParams({
-      accessKey: encodeURIComponent(accessKey),
-      secretKey: encodeURIComponent(secretKey),
-      region: encodeURIComponent(region)
-    }).toString();
-    const url = 'http://localhost:8080/loggroups';
-
-    try {
-      const response = await fetch(url, {
-        method: 'GET', // Assuming the endpoint is expecting a GET request
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Key': encodeURIComponent(accessKey),
-          'Secret-Key': encodeURIComponent(secretKey),
-          'AWS-Region': encodeURIComponent(region),
-        }
-      });
-      console.log('in use Effect');
-      const data = await response.json();
-      setLogGroups(data);
-      console.log('log Groups:', logGroups);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [accessKey, secretKey, region]);
-
-  useEffect(() => {
-    if (selectedLogGroup) {
-      getLogStreams();
-    }
-  }, [selectedLogGroup, getLogStreams]);
-
+  const {
+    logs,
+    searchQuery,
+    setSearchQuery,
+    fetchLogs,
+  } = useLogs(accessKey, secretKey, region, selectedLogGroup, selectedLogStream);
  
-
-  /* ***************************** Fetch Log Streams State  ************************ */
-
-  const getLogStreams = useCallback(async () => {
- 
-    const url = 'http://localhost:8080/logstreams';
-
-    try {
-      const response = await fetch(url, {
-        method: 'GET', // Assuming the endpoint is expecting a GET request
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Key': encodeURIComponent(accessKey),
-          'Secret-Key': encodeURIComponent(secretKey),
-          'AWS-Region': encodeURIComponent(region),
-          'Log-Group': encodeURIComponent(selectedLogGroup)
-        }
-      });
-      console.log('in use Effect');
-      const data = await response.json();
-      setLogStreams(data);
-      console.log('log Streams:', logStreams);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [selectedLogGroup, accessKey, secretKey, region]);
-
-
-  useEffect(() => {
-    if (selectedLogStream) {
-      getLogs();
-    }
-  }, [selectedLogStream, getLogs]);
-  
 
   /* ******************** THEME BUTTON CLICK HANDLER  ******************* */
 
-  const handleThemeButtonClick = () => {
-    theme === stackoverflowDark 
-      ? (setTheme(stackoverflowLight), setThemeButton('Dark Mode')) 
-      : (setTheme(stackoverflowDark), setThemeButton('Light Mode'));
-  };
+  const {
+    theme,
+    themeButton,
+    handleThemeButtonClick,
+  } = useThemeButton();
 
   /* ******************** SEARCH QUERY HANDLER  ******************* */
   
@@ -164,8 +74,8 @@ const App = () => {
               secretKey={secretKey}
               setRegion={setRegion}
               region={region}
-              getLogs={getLogs}
-              getLogGroups={getLogGroups}
+              getLogs={fetchLogs}
+              getLogGroups={fetchLogGroups}
             />
           }
         />
@@ -174,9 +84,9 @@ const App = () => {
           {
             <>
               <ConsoleNav
-                getLogs={getLogs}
-                getLogStreams={getLogStreams}
-                getLogGroups={getLogGroups}
+                getLogs={fetchLogs}
+                getLogStreams={fetchLogStreams}
+                getLogGroups={fetchLogGroups}
                 logStreams={logStreams}
                 setSelectedLogStream={setSelectedLogStream}
                 selectedLogStream={selectedLogStream}
@@ -190,7 +100,7 @@ const App = () => {
               />
               <Console
                 searchQuery={searchQuery}
-                jsonObject={stream}
+                jsonObject={logs}
                 theme={theme}
               />
             </>
