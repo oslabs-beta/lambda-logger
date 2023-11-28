@@ -5,11 +5,16 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 </p>
 
 ## Table of Contents
-1. [Features]()
-2. [Getting Started Guide]()
-3. [Documentation]()
-4. [Contributing]()
-5. [Contributors]()
+1. [Features](#features)
+2. [Getting Started Guide](#getting-started-guide)
+3. [Documentation](#documentation)
+4. [Contributing](#contributing)
+5. [Contributors](#contributors)
+
+## Features
+- 
+- 
+- 
 
 ## Getting Started Guide
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied url'`
@@ -25,7 +30,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     - After get keys, get the region 
     ![](./docs/assets/images/region.png)
 
-- Since we have all stuff to log in, on the terminal run `npm run dev`, navigate to http://localhost:8080/ to view web application, and use both keys and region to access.
+- Since we have all stuff to log in, on the terminal run `npm install`, then `npm run dev`, navigate to http://localhost:8080/ to view web application, and use both keys and region to access.
     ![](./docs/assets/images/homepage.png)
 
 - Nav Bar Overview (Dropdowns, Search, Theme)
@@ -40,6 +45,8 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     - For more info, click [here](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html).
 
 - React Syntax Highlighter
+    - Syntax highlighting component for `React`` using the seriously super amazing [lowlight](https://github.com/wooorm/lowlight) and [refractor](https://github.com/wooorm/refractor) by [wooorm](https://github.com/wooorm).
+    - Click [here](https://www.npmjs.com/package/react-syntax-highlighter) for more information.
 
 ## Roadmap
 | Feature                                          | Status |
@@ -49,6 +56,8 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 | Dark/Light Mode                                  | ✅     |
 | Increase Testing Coverage                        | ⏳     |
 | Make Stream Content linkable                      | ⚡️      |
+| Adding more themes                                | ⚡️      |
+| Improving search                               | ⚡️      |
 
 - ✅ = Completed
 - ⏳ = In-Progress
@@ -56,19 +65,51 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 
 ## Contributing
 - Potential iteration ideas
-- What needs to be improved (feature-wise)
-- Adding more themes
-- Improving search
 - What needs to be improved (code-wise)
-- Add additional front end tests
-- Add additional back end tests
-- Migrate to AWS SDK 3
+    - Anything from the backlog
+    - Add additional front end tests
+    - Add additional back end tests
+    - Migrate to AWS SDK 3
 
 ## Contributors
-• Conrad Preston: [LinkedIn]() | [GitHub](https://github.com/Conrady82)
 
-• Hoang Dang: [LinkedIn]() | [GitHub](https://github.com/hoangdang91768)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/128096173?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Conrad Preston</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/conrad-preston-aaaa9b252/">🖇️</a>
+      <a href="https://github.com/Conrady82">🐙</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/144387822?s=400&u=8cb84bdf130e87fef7cb92283af412d82594be20&v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Hoang Dang</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/hoang-dang-b884b4296/">🖇️</a>
+      <a href="https://github.com/hoangdang91768">🐙</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/53544649?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Luke Clarkson</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/ljclarkson/">🖇️</a>
+      <a href="https://github.com/LClarkson">🐙</a>
+    </td>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/138337584?v=4" width="140px;" alt=""/>
+      <br />
+      <sub><b>Nick C. Mason</b></sub>
+      <br />
+      <a href="">🖇️</a>
+      <a href="https://github.com/nickmasonswe">🐙</a>
+    </td>
+  </tr>
+</table>
 
-• Luke Clarkson: [LinkedIn]() | [GitHub](https://github.com/LClarkson)
-
-• Nick C. Mason: [LinkedIn]() | [GitHub](https://github.com/nickmasonswe)
+- 💻 = Website
+- 🖇️ = LinkedIn
+- 🐙 = Github
