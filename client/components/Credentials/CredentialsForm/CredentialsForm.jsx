@@ -42,7 +42,7 @@ export default function CredentialsForm({
       {hasClickedSubmit && !authenticated && (
         <>
           <br />
-          <div style={{ color: "yellow" }} id="authMessage">Credentials Not Accepted</div>
+          <div style={{ color: "yellow" }}>Credentials Not Accepted</div>
         </>
       )}
     </div>

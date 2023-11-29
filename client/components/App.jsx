@@ -85,29 +85,29 @@ const App = () => {
             />
           }
         /> 
-          <Route
-            path="/console"
-            element={
-              <>
-                <ConsoleNav
-                  getLogStreams={fetchLogStreams}
-                  getLogGroups={fetchLogGroups}
-                  logStreams={logStreams}
-                  setSelectedLogStream={setSelectedLogStream}
-                  selectedLogStream={selectedLogStream}
-                  selectedLogGroup={selectedLogGroup}
-                  setSelectedLogGroup={setSelectedLogGroup}
-                  handleThemeButtonClick={handleThemeButtonClick}
-                  themeButton={themeButton}
-                  logGroups={logGroups}
-                  searchQuery={searchQuery}
-                  handleSearchChange={handleSearchChange}
-                  setLogs={setLogs}
-                />
-                <Console jsonString={jsonString} theme={theme} />
-              </>
-            }
-            />
+        <Route
+          path="/console"
+          element={
+            <>
+              <ConsoleNav
+                getLogStreams={fetchLogStreams}
+                getLogGroups={fetchLogGroups}
+                logStreams={logStreams}
+                setSelectedLogStream={setSelectedLogStream}
+                selectedLogStream={selectedLogStream}
+                selectedLogGroup={selectedLogGroup}
+                setSelectedLogGroup={setSelectedLogGroup}
+                handleThemeButtonClick={handleThemeButtonClick}
+                themeButton={themeButton}
+                logGroups={logGroups}
+                searchQuery={searchQuery}
+                handleSearchChange={handleSearchChange}
+                setLogs={setLogs}
+              />
+              <Console jsonString={jsonString} theme={theme} />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );
