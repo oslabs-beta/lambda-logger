@@ -6,7 +6,7 @@ function useLogGroups(accessKey, secretKey, region) {
   const [selectedLogGroup, setSelectedLogGroup] = useState('');
 
   const fetchLogGroups = useCallback(async () => {
-    const url = 'http://localhost:3000/loggroups';
+    const url = '/loggroups';
 
     try {
       const response = await fetch(url, {
