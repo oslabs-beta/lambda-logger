@@ -1,0 +1,19 @@
+import React from 'react';
+import styles from '../../src/styles/MainSection.module.css';
+
+const GetStarted = () => {
+    return (
+        <div className={styles.MainSection}>
+        <div className={styles.LeftBox}>
+          <h2>Getting Started</h2>
+          <p>Create a temporary access key in you AWS account, and enter those in our application to scrape your logs from CloudWatch and run them through our custom parser</p>
+        </div>
+        <div className={styles.RightBox}>
+          {/* Place your high-resolution GIF here */}
+          <img src="../../src/images/Placeholder.png" alt="High Res" />
+        </div>
+      </div>
+    );
+};
+
+export default GetStarted;

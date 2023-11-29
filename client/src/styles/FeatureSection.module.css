@@ -1,0 +1,40 @@
+.FeatureSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44.44vh; /* Approximately 2/3 of the previous section's height */
+    width: 100%;
+    background: linear-gradient(to right, 
+                rgba(255, 113, 31, 0) 0%, 
+                rgba(255, 113, 31, 0.75) 12.5%, 
+                rgba(255, 113, 31, 0.75) 87.5%, 
+                rgba(255, 113, 31, 0) 100%);
+}
+
+.Content {
+    text-align: center;
+    padding: 20px;
+    color: white; /* Adjust text color as needed */
+}
+
+.FeatureSection h2 {
+    /* Style your header */
+}
+
+.FeatureSection p {
+    /* Style your text */
+}
+
+.HoverButton {
+    background-color: transparent;
+    border: 2px solid white; /* Adjust border color as needed */
+    color: white; /* Adjust text color as needed */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.HoverButton:hover {
+    background-color: white;
+    color: #ff711f; /* Text color on hover */
+}

@@ -1,0 +1,66 @@
+.Contributors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* Adjust based on content */
+    width: 100%;
+    background: linear-gradient(to right, 
+                rgba(255, 113, 31, 0) 0%, 
+                rgba(255, 113, 31, 0.75) 12.5%, 
+                rgba(255, 113, 31, 0.75) 87.5%, 
+                rgba(255, 113, 31, 0) 100%);
+    padding: 20px 0; /* Vertical padding */
+}
+
+.ContributorsBox {
+    width: 66.67%; /* 2/3 of the width */
+    text-align: center;
+    background-color: rgba(255, 179, 128, 0.8); /* Lighter, translucent orange */
+    padding: 20px;
+    border-radius: 10px; /* Optional for rounded corners */
+    margin: 20px auto; /* Centering the box */
+}
+
+
+.ContributorCard {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    width: 200px; /* Adjust as needed */
+    text-align: center;
+}
+
+.ContributorCard img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%; /* Circular images */
+}
+
+.ContributorLinks {
+    margin-top: 10px;
+}
+
+.ContributorsText {
+    margin-top: 20px;
+    color: black; /* Adjust color as needed */
+}
+
+.ContributorsButton {
+    margin-top: 10px;
+    padding: 10px 30px; /* Oblong shape */
+    background-color: #fff; /* White background */
+    color: #ff711f; /* Orange text for contrast */
+    border: 1px solid transparent; /* Transparent border, consistent width */
+    border-radius: 25px; /* Rounded edges */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold; /* Bold text */
+}
+
+.ContributorsButton:hover {
+    background-color: rgba(255, 179, 128, 0.8); /* Lighter, translucent orange */
+    border-color: #fff; /* White border, same width */
+    color: #fff; /* White text on hover */
+}
+
+

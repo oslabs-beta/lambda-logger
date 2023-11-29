@@ -11,6 +11,7 @@ import useLogStreams from '../hooks/useLogStreams';
 import useLogs from '../hooks/useLogs';
 import useThemeButton from '../hooks/useThemeButton.js';
 import useSearch from '../hooks/useSearch.js';
+import Splash from "./Splash/Splash.jsx"
 
 const App = () => {
 
@@ -71,7 +72,11 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element=
+        <Route path="/" element={
+          <Splash />
+        }
+        />
+        <Route path="/credentials" element=
           {
             <Credentials
               authenticated={authenticated}
