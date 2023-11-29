@@ -40,6 +40,7 @@ function useLogs(
   return {
     logs,
     fetchLogs,
+    setLogs,
   };
 }
 

@@ -1,4 +1,3 @@
-//import React, { useState, useEffect } from 'react';
 import React from 'react';
 import styles from '../src/styles/Header.module.css';
 

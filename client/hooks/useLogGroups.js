@@ -5,25 +5,35 @@ function useLogGroups(accessKey, secretKey, region) {
   const [logGroups, setLogGroups] = useState([]);
   const [selectedLogGroup, setSelectedLogGroup] = useState("");
 
-  const fetchLogGroups = useCallback(async () => {
-    const url = "http://localhost:8080/loggroups";
+  const fetchLogGroups = useCallback(
+    async (setAuthenticated) => {
+      const url = "http://localhost:8080/loggroups";
 
-    try {
-      const response = await fetch(url, {
-        method: "GET", // Assuming the endpoint is expecting a GET request
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Key": encodeURIComponent(accessKey),
-          "Secret-Key": encodeURIComponent(secretKey),
-          "AWS-Region": encodeURIComponent(region),
-        },
-      });
-      const data = await response.json();
-      setLogGroups(data);
-    } catch (error) {
-      console.error("Failed to fetch log groups:", error);
-    }
-  }, [accessKey, secretKey, region]);
+      try {
+        const response = await fetch(url, {
+          method: "GET", // Assuming the endpoint is expecting a GET request
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Key": encodeURIComponent(accessKey),
+            "Secret-Key": encodeURIComponent(secretKey),
+            "AWS-Region": encodeURIComponent(region),
+          },
+        });
+        if (!response.ok) {
+          const errorData = await response.json(); // Parse error response
+          setAuthenticated(false);
+          return;
+        }
+        const data = await response.json();
+        setLogGroups(data);
+        setAuthenticated(true);
+        return;
+      } catch (err) {
+        console.error("Failed to fetch log groups:", err);
+      }
+    },
+    [accessKey, secretKey, region]
+  );
 
   useEffect(() => {
     if (accessKey && secretKey && region) {

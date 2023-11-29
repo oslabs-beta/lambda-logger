@@ -1,5 +1,4 @@
 jest.mock("react-syntax-highlighter", () => {
-  // Mock SyntaxHighlighter component
   const SyntaxHighlighter = ({
     children,
     style,
@@ -9,22 +8,17 @@ jest.mock("react-syntax-highlighter", () => {
     lineNumberStyle,
     className,
   }) => {
-    // Simulate the rendering of JSON data
     const content = Array.isArray(children)
       ? JSON.stringify(children, null, 2)
       : children;
 
     return (
       <div style={style} className={className}>
-        {/* Simulate line numbers if needed */}
         {showLineNumbers && <div style={lineNumberStyle}>Line Numbers</div>}
-        {/* Render the content (JSON or otherwise) */}
         <pre>{content}</pre>
       </div>
     );
   };
-
-  // Return the mock component
   return {
     Light: SyntaxHighlighter,
   };
@@ -36,11 +30,6 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Console from "../client/components/Console";
-
-// Mock theme for testing
-const mockTheme = {
-  /* ... your theme object ... */
-};
 
 describe("<Console />", () => {
   it("renders without crashing", () => {
