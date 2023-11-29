@@ -7,16 +7,16 @@ const logController = {};
 
 logController.fetchLogGroups = (req, res, next) => {
   const params = {
-    limit: "50",
+    limit: '50',
   };
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -28,7 +28,7 @@ logController.fetchLogGroups = (req, res, next) => {
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
+      console.log('Error', err);
       return next(err);
     } else {
       const groupNames = data.logGroups.map((group) => {
@@ -37,10 +37,10 @@ logController.fetchLogGroups = (req, res, next) => {
       const filteredGroupNames = data.logGroups
         .filter(
           (group) =>
-            group.logGroupName && group.logGroupName.startsWith("/aws/lambda")
+            group.logGroupName && group.logGroupName.startsWith('/aws/lambda')
         )
         .map((group) => group.logGroupName);
-      console.log("Log Groups", filteredGroupNames);
+      console.log('Log Groups', filteredGroupNames);
       res.locals.loggroups = filteredGroupNames;
       return next();
     }
@@ -51,17 +51,17 @@ logController.fetchLogGroups = (req, res, next) => {
 
 logController.fetchLogStreams = (req, res, next) => {
   const paramsDescribe = {
-    logGroupName: decodeURIComponent(req.headers["log-group"]),
+    logGroupName: decodeURIComponent(req.headers['log-group']),
   };
 
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -76,14 +76,14 @@ logController.fetchLogStreams = (req, res, next) => {
       return next(err); // Pass the error to the Express error handler
     } else {
       if (!data.logStreams || data.logStreams.length === 0) {
-        return next(new Error("No log streams found")); // Handle the case where there are no log streams
+        return next(new Error('No log streams found')); // Handle the case where there are no log streams
       }
-      console.log("streams data:", data);
+      console.log('streams data:', data);
       const streams = data.logStreams;
       const streamnames = streams.map((stream) => {
         return stream.logStreamName;
       });
-      console.log("streams pulled from API:", streamnames);
+      console.log('streams pulled from API:', streamnames);
       res.locals.streams = streamnames;
       return next();
     }
@@ -93,13 +93,13 @@ logController.fetchLogStreams = (req, res, next) => {
 
 logController.fetchLogs = (req, res, next) => {
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers
@@ -121,9 +121,9 @@ logController.fetchLogs = (req, res, next) => {
       return next(err);
     } else {
       try {
-        console.log("Inside fetching log stream data");
+        console.log('Inside fetching log stream data');
         const messages = data.events.map((event) => {
-          console.log("Inside fetching filtered log data:", data);
+          console.log('Inside fetching filtered log data:', data);
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
           const match = messageString.match(jsonRegex);
@@ -133,7 +133,7 @@ logController.fetchLogs = (req, res, next) => {
             try {
               messageObj = JSON.parse(match[0]);
             } catch (parseErr) {
-              console.error("Error parsing JSON", parseErr);
+              console.error('Error parsing JSON', parseErr);
             }
           }
 
@@ -158,11 +158,11 @@ logController.fetchLogs = (req, res, next) => {
   function parseLogEntry(logString, jsonMatch) {
     logString = logString.trim();
 
-    if (logString.startsWith("2023")) {
+    if (logString.startsWith('2023')) {
       // Standard Log Format
       const parts = logString
-        .replace(jsonMatch && jsonMatch[0], "")
-        .split("\t")
+        .replace(jsonMatch && jsonMatch[0], '')
+        .split('\t')
         .map((part) => part.trim());
       return {
         timestamp: parts[0],
@@ -171,12 +171,12 @@ logController.fetchLogs = (req, res, next) => {
         message: parts[3],
       };
     } else if (
-      logString.startsWith("START") ||
-      logString.startsWith("INIT_START")
+      logString.startsWith('START') ||
+      logString.startsWith('INIT_START')
     ) {
       // START, INIT_START Formats
       return parseKeyValuePairs(logString);
-    } else if (logString.startsWith("REPORT") || logString.startsWith("END")) {
+    } else if (logString.startsWith('REPORT') || logString.startsWith('END')) {
       // REPORT, END Formats
       return parseKeyValuePairs(logString);
     } else {
@@ -187,9 +187,9 @@ logController.fetchLogs = (req, res, next) => {
 
   function parseKeyValuePairs(logString) {
     const obj = {};
-    const parts = logString.split("\t");
+    const parts = logString.split('\t');
     parts.forEach((part) => {
-      const [key, value] = part.split(":").map((s) => s.trim());
+      const [key, value] = part.split(':').map((s) => s.trim());
       if (key && value) {
         obj[key] = value;
       }
