@@ -28,7 +28,9 @@ const App = () => {
     selectedLogGroup,
     setSelectedLogGroup,
     fetchLogGroups,
-  } = useLogGroups(accessKey, secretKey, region);
+    emptyRegion,
+    isLoading,
+  } = useLogGroups(accessKey, secretKey, region, setAuthenticated);
 
   /*********************** Custom Hook for managing API call fetching log streams and state  ***************************/
 
@@ -82,6 +84,8 @@ const App = () => {
               region={region}
               getLogs={fetchLogs}
               getLogGroups={fetchLogGroups}
+              emptyRegion={emptyRegion}
+              isLoading={isLoading}
             />
           }
         /> 

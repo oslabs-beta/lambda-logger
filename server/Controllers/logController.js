@@ -9,22 +9,7 @@ logController.fetchLogGroups = (req, res, next) => {
   const params = {
     limit: "50",
   };
-  // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
-
-  // Check if all necessary credentials are provided
-  if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
-  }
-
-  // Update the AWS config with the credentials from the headers
-  AWS.config.update({
-    accessKeyId: decodeURIComponent(accessKey),
-    secretAccessKey: decodeURIComponent(secretKey),
-    region: decodeURIComponent(region),
-  });
+  const AWS = res.locals.AWS;
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
     if (err) {
@@ -51,23 +36,7 @@ logController.fetchLogStreams = (req, res, next) => {
   const paramsDescribe = {
     logGroupName: decodeURIComponent(req.headers["log-group"]),
   };
-
-  // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
-
-  // Check if all necessary credentials are provided
-  if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
-  }
-
-  // Update the AWS config with the credentials from the headers
-  AWS.config.update({
-    accessKeyId: decodeURIComponent(accessKey),
-    secretAccessKey: decodeURIComponent(secretKey),
-    region: decodeURIComponent(region),
-  });
+  const AWS = res.locals.AWS;
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogStreams(paramsDescribe, function (err, data) {
     if (err) {
@@ -88,24 +57,7 @@ logController.fetchLogStreams = (req, res, next) => {
 /********************* FETCH LOGS ***********************************************/
 
 logController.fetchLogs = (req, res, next) => {
-  // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
-
-  // Check if all necessary credentials are provided
-  if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
-  }
-
-  // Update the AWS config with the credentials from the headers
-  AWS.config.update({
-    accessKeyId: decodeURIComponent(accessKey),
-    secretAccessKey: decodeURIComponent(secretKey),
-    region: decodeURIComponent(region),
-  });
   const cloudWatchLogs = new AWS.CloudWatchLogs();
-
   // Define parameters for filterLogEvents
   const params = {
     logGroupName: decodeURIComponent(req.headers["log-group"]),

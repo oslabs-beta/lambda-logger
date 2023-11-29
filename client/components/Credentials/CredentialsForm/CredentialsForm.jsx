@@ -15,7 +15,9 @@ export default function CredentialsForm({
   regionOptions,
   getLogGroups,
   setAuthenticated,
-  authenticated
+  authenticated,
+  emptyRegion,
+  isLoading,
 }) {
 
   const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
@@ -39,11 +41,12 @@ export default function CredentialsForm({
         secretKey={secretKey}
         region={region}
       />
-      {hasClickedSubmit && !authenticated && (
-        <>
-          <br />
-          <div style={{ color: "yellow" }}>Credentials Not Accepted</div>
-        </>
+      {isLoading && hasClickedSubmit && <div style={{ color: "yellow" }} >Loading...</div>}
+      {!isLoading && hasClickedSubmit && !authenticated && !emptyRegion && (
+        <div style={{ color: "yellow" }}>Credentials Not Accepted</div>
+      )}
+      {!isLoading && hasClickedSubmit && !authenticated && emptyRegion && (
+        <div style={{ color: "yellow" }}>No Log Groups in Region</div>
       )}
     </div>
   );

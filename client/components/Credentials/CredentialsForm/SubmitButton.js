@@ -10,16 +10,9 @@ function SubmitButton({
 }) {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authenticated && hasClickedSubmit) {
-      navigate("/console");
-    }
-  }, [authenticated, navigate, hasClickedSubmit]);
-
   const handleClick = async () => {
-    await getLogGroups(setAuthenticated);
     setHasClickedSubmit(true);
-    if (authenticated) {
+    if (authenticated && hasClickedSubmit) {
       navigate("/console");
     }
   };

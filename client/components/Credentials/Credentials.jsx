@@ -4,7 +4,7 @@ import styles from '../../src/styles/Credentials.module.css';
 import useRegions from '../../hooks/useRegions';
 
 
-export default function Credentials({setAccessKey, setSecretKey, setRegion, accessKey, secretKey, region, getLogGroups, setAuthenticated, authenticated}) {
+export default function Credentials({setAccessKey, setSecretKey, setRegion, accessKey, secretKey, region, getLogGroups, setAuthenticated, authenticated, emptyRegion, isLoading}) {
 
   const { regionOptions } = useRegions();
 
@@ -22,6 +22,8 @@ export default function Credentials({setAccessKey, setSecretKey, setRegion, acce
         regionOptions={regionOptions}
         getLogGroups={getLogGroups}
         setAuthenticated={setAuthenticated}
+        emptyRegion={emptyRegion}
+        isLoading={isLoading}
       />
     </div>
   );

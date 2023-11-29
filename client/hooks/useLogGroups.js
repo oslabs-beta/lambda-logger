@@ -1,13 +1,17 @@
 // hooks/useLogGroups.js
 import { useState, useEffect, useCallback } from "react";
 
-function useLogGroups(accessKey, secretKey, region) {
+function useLogGroups(accessKey, secretKey, region, setAuthenticated) {
   const [logGroups, setLogGroups] = useState([]);
   const [selectedLogGroup, setSelectedLogGroup] = useState("");
+  const [emptyRegion, setEmptyRegion] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchLogGroups = useCallback(
     async (setAuthenticated) => {
-      const url = "http://localhost:8080/loggroups";
+      setIsLoading(true);
+      setEmptyRegion(false);
+      const url = "http://localhost:8080/credentials/loggroups";
 
       try {
         const response = await fetch(url, {
@@ -22,22 +26,31 @@ function useLogGroups(accessKey, secretKey, region) {
         if (!response.ok) {
           const errorData = await response.json(); // Parse error response
           setAuthenticated(false);
+          setIsLoading(false);
           return;
         }
         const data = await response.json();
+        if (!data.length) {
+          setAuthenticated(false);
+          setEmptyRegion(true);
+          setIsLoading(false);
+          return;
+        }
+        console.log(data);
         setLogGroups(data);
         setAuthenticated(true);
+        setIsLoading(false);
         return;
       } catch (err) {
         console.error("Failed to fetch log groups:", err);
       }
     },
-    [accessKey, secretKey, region]
+    [accessKey, secretKey, region, setAuthenticated]
   );
 
   useEffect(() => {
     if (accessKey && secretKey && region) {
-      fetchLogGroups();
+      fetchLogGroups(setAuthenticated);
     }
   }, [accessKey, secretKey, region, fetchLogGroups]);
 
@@ -46,6 +59,8 @@ function useLogGroups(accessKey, secretKey, region) {
     selectedLogGroup,
     setSelectedLogGroup,
     fetchLogGroups,
+    emptyRegion,
+    isLoading,
   };
 }
 
