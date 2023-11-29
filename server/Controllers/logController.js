@@ -28,7 +28,6 @@ logController.fetchLogGroups = (req, res, next) => {
   const cloudWatchLogs = new AWS.CloudWatchLogs();
   cloudWatchLogs.describeLogGroups(params, function (err, data) {
     if (err) {
-      console.log("Error", err);
       return next(err);
     } else {
       const groupNames = data.logGroups.map((group) => {
@@ -40,7 +39,6 @@ logController.fetchLogGroups = (req, res, next) => {
             group.logGroupName && group.logGroupName.startsWith("/aws/lambda")
         )
         .map((group) => group.logGroupName);
-      console.log("Log Groups", filteredGroupNames);
       res.locals.loggroups = filteredGroupNames;
       return next();
     }
@@ -50,7 +48,6 @@ logController.fetchLogGroups = (req, res, next) => {
 /********************* FETCH LOG STREAMS ***********************************************/
 
 logController.fetchLogStreams = (req, res, next) => {
-  console.log("inside fetch streams,");
   const paramsDescribe = {
     logGroupName: decodeURIComponent(req.headers["log-group"]),
   };
@@ -79,12 +76,10 @@ logController.fetchLogStreams = (req, res, next) => {
       if (!data.logStreams || data.logStreams.length === 0) {
         return next(new Error("No log streams found")); // Handle the case where there are no log streams
       }
-      console.log("streams data:", data);
       const streams = data.logStreams;
       const streamnames = streams.map((stream) => {
         return stream.logStreamName;
       });
-      console.log("streams pulled from API:", streamnames);
       res.locals.streams = streamnames;
       return next();
     }
@@ -115,10 +110,6 @@ logController.fetchLogs = (req, res, next) => {
   const params = {
     logGroupName: decodeURIComponent(req.headers["log-group"]),
     logStreamNames: [decodeURIComponent(req.headers["log-stream"])],
-    // Optionally, specify a filter pattern and time range
-    // filterPattern: '', // Define a filter pattern if needed
-    // startTime: START_TIME, // StartTime in milliseconds
-    // endTime: END_TIME, // EndTime in milliseconds
   };
 
   cloudWatchLogs.filterLogEvents(params, function (err, data) {
@@ -126,9 +117,7 @@ logController.fetchLogs = (req, res, next) => {
       return next(err);
     } else {
       try {
-        console.log("Inside fetching log stream data");
         const messages = data.events.map((event) => {
-          console.log("Inside fetching filtered log data:", data);
           const messageString = event.message;
           const jsonRegex = /\{[\s\S]*\}/;
           const match = messageString.match(jsonRegex);
@@ -172,7 +161,7 @@ logController.fetchLogs = (req, res, next) => {
       return {
         timestamp: parts[0],
         id: parts[1],
-        level: parts[2],
+        type: parts[2],
         message: parts[3],
       };
     } else if (
