@@ -14,7 +14,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 ## Features
 - Dynamically Fetch Logs From CloudWatch
 - Custom Log Interpreter
-- Search Logs
+- Searchable Logs
 
 ## Instruction
 - Visit https://lambdalogger.dev/, navigate to App, and enter your AWS temporary access credentials.
