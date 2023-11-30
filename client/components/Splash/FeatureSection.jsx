@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../../src/styles/FeatureSection.module.css'; // Adjust the path as needed
+import styles from '../../src/styles/FeatureSection.module.css'; 
 
 export default function FeatureSection() {
   return (

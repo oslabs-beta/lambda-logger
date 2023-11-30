@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../../src/styles/Contributors.module.css'; // Assuming you have a CSS module for this
+import styles from '../../src/styles/Contributors.module.css'; 
 
 const contributors = [
   { name: 'Conrad Preston', github: 'https://github.com/Conrady82', linkedin: 'https://www.linkedin.com/in/conrad-preston-aaaa9b252/', image: '../../src/images/conrad.jpeg' },
