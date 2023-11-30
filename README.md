@@ -20,14 +20,14 @@ Lambda Logger tackles post-lambda-deployment challenges by introducing an intuit
 - Visit https://lambdalogger.dev/, navigate to App, and enter your temporary AWS access credentials.
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
 - How can you get your "access key" and "secret key" to log in?
-    - From your AWS root account, you should have your own "IAM" user. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
-    - After getting your "IAM User" credentials, in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. In Summary, click `Create access key` --> choose `Local code` --> Check the `I understand` box --> click `Next` --> In `Description tag value`, put any name you want --> click `Create access key`
+    - From your AWS root account, you should have your own IAM user. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
+    - After getting your "IAM User" credentials, in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. In summary, click `Create access key` --> choose `Local code` --> Check the `I understand` box --> click `Next` --> In `Description tag value`, put any name you want --> click `Create access key`
 
     - ![](./docs/assets/images/get-access-key.gif)
 
-    - Now you should save your `Secret access key` somewhere (**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you won't have a chance to view your "Secret key access" again, so you'll have to create a new one.
+    - Now you should save your `Secret access key` somewhere safe (**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you won't have a chance to view your "Secret key access" again, so you'll have to create a new one.
 
-    - **Note:** You only can create up to "2 Access keys" at a time per user. If you want to create another one, you must delete an old one.
+    - **Note:** You can only create up to two Access keys at a time per user. If you want to create another one, you must delete an old one.
     - After getting the keys, get the region 
     ![](./docs/assets/images/region.png)
 
