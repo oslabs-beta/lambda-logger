@@ -70,11 +70,14 @@ Lambda Logger tackles post-lambda-deployment challenges by introducing an intuit
 - ⚡️ = Backlog
 
 ### Contributing
-- Potential iteration ideas
+- Potential Iteration Ideas
   - Anything from the backlog
   - Add additional front-end tests
   - Add additional back-end tests
   - Migrate to AWS SDK 3
+  - Implemnet Apache Solr for better search
+  - Implement Grafana to make expanded dashboards
+  - Improve or expand the capabilities of the JSON parser (see documentation)
 
 ## Contributors
 
