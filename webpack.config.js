@@ -14,8 +14,8 @@ module.exports = {
     }),
   ],
 
-  mode: 'development',
-  devtool: 'eval-source-map',
+  mode: 'production',
+  //devtool: 'eval-source-map',
   devServer: {
     static: {
       directory: path.resolve(__dirname, 'build'),
