@@ -28,10 +28,8 @@ Lambda Logger tackles post-lambda-deployment challenges by introducing an intuit
     - Now you should save your `Secret access key` somewhere safe (**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you won't have a chance to view your "Secret key access" again, so you'll have to create a new one.
 
     - **Note:** You can only create up to two Access keys at a time per user. If you want to create another one, you must delete an old one.
-    - After getting the keys, get the region 
-    ![](./docs/assets/images/region.png)
-
-- Now that we have our credentials, in the terminal, run `npm install`, then `npm run dev`. Navigate to http://localhost:8080 to view the web application, navigate to the App page, and enter your credentials and region to access your Lambda Logs.
+   
+- Now that we have our credentials, in your local terminal, run `npm install`, then `npm run dev`. Navigate to http://localhost:8080 to view the web application, navigate to the App page, and enter your credentials and region to access your Lambda Logs.
     ![](./docs/assets/images/homepage.png)
 
 - Nav Bar Overview (Dropdowns, Search, Theme)
