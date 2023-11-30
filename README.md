@@ -21,7 +21,7 @@ Lambda Logger tackles post-lambda-deployment challenges by introducing an intuit
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
 - How can you get your "access key" and "secret key" to log in?
     - From your AWS root account, you should have your own IAM user. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
-    - After getting your "IAM User" credentials, in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. In summary, click `Create access key` --> choose `Local code` --> Check the `I understand` box --> click `Next` --> In `Description tag value`, put any name you want --> click `Create access key`
+    - After getting your "IAM User" credentials, in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. Click `Create access key` --> choose `Local code` --> Check the `I understand` box --> click `Next` --> In `Description tag value`, put any name you want --> click `Create access key`
 
     - ![](./docs/assets/images/get-access-key.gif)
 
