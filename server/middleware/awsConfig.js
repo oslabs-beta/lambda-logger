@@ -1,12 +1,12 @@
-const AWS = require("aws-sdk");
-require("dotenv").config();
+const AWS = require('aws-sdk');
+require('dotenv').config();
 
 // Create a function to configure AWS and return the configured AWS object
 const configureAWS = (req, res, next) => {
   // Access the headers instead of query parameters
-  const accessKey = req.headers["access-key"];
-  const secretKey = req.headers["secret-key"];
-  const region = req.headers["aws-region"];
+  const accessKey = req.headers['access-key'];
+  const secretKey = req.headers['secret-key'];
+  const region = req.headers['aws-region'];
   //   if (req.headers["log-group"]) {
   //     res.locals.loggroup = req.headers["log-group"];
   //   }
@@ -16,7 +16,7 @@ const configureAWS = (req, res, next) => {
 
   // Check if all necessary credentials are provided
   if (!accessKey || !secretKey || !region) {
-    return next(new Error("Missing AWS credentials in headers"));
+    return next(new Error('Missing AWS credentials in headers'));
   }
 
   // Update the AWS config with the credentials from the headers

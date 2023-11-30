@@ -7,7 +7,7 @@ function RefreshButton({ getLogGroups, getLogStreams, setLogs }) {
     <button onClick={() => {
       getLogGroups();
       getLogStreams();
-      setLogs("LATEST LOGS LOADED FROM CLOUDWATCH, PLEASE SELECT NEW LOGS TO VIEW");
+      setLogs('LATEST LOGS LOADED FROM CLOUDWATCH, PLEASE SELECT NEW LOGS TO VIEW');
     }}>Refresh</button>
   );
 }

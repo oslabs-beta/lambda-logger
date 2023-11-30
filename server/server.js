@@ -1,21 +1,21 @@
 const PORT = 3000;
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
 const app = express();
-const logRoutes = require("./routes/logRoutes");
+const logRoutes = require('./routes/logRoutes');
 
 // Middleware
 app.use(express.json());
-app.use("/build", express.static(path.resolve(__dirname, "../build")));
-app.use(express.static(path.resolve(__dirname, "../client")));
+app.use('/build', express.static(path.resolve(__dirname, '../build')));
+app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use("/credentials", logRoutes);
+app.use('/credentials', logRoutes);
 
 // 404 route
-app.all("*", (req, res) => {
-  res.status(404).send("The page you are looking for does not exist");
+app.all('*', (req, res) => {
+  res.status(404).send('The page you are looking for does not exist');
 });
 
 // Global error handler

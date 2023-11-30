@@ -11,7 +11,7 @@ import useLogStreams from '../hooks/useLogStreams';
 import useLogs from '../hooks/useLogs';
 import useThemeButton from '../hooks/useThemeButton.js';
 import useSearch from '../hooks/useSearch.js';
-import Splash from "./Splash/Splash.jsx"
+import Splash from './Splash/Splash.jsx';
 
 const App = () => {
 
