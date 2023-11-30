@@ -1,14 +1,14 @@
 # Lambda-logger
-Lambda Logger tackles post-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible return values. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
-<p align="center">
-  <img src="./docs/assets/images/minLogo.png" width="30%" />
+<p align="left">
+  <img src="./docs/assets/images/minLogo.png" width="15%" />
 </p>
+Lambda Logger tackles post-lambda-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible value. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
 
 ## Table of Contents
 1. [Features](#features)
 2. [Instructions](#instructions)
 3. [Documentation](#documentation)
-4. [OSP Information](#osp-information)
+4. [Open Source Information](#open-source-information)
 5. [Contributors](#contributors)
 
 ## Features
@@ -17,7 +17,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 - Searchable Logs
 
 ## Instructions
-- Visit https://lambdalogger.dev/, navigate to App, and enter your AWS temporary access credentials.
+- Visit https://lambdalogger.dev/, navigate to App, and enter your temporary AWS access credentials.
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
 - How can you get your "access key" and "secret key" to log in?
     - From your AWS root account, you should have your own "IAM" user. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
@@ -50,7 +50,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
     - Syntax highlighting component for `React`` using the seriously super amazing [lowlight](https://github.com/wooorm/lowlight) and [refractor](https://github.com/wooorm/refractor) by [wooorm](https://github.com/wooorm).
     - Click [here](https://www.npmjs.com/package/react-syntax-highlighter) for more information.
 
-## OSP Information
+## Open Source Information
 ### Testing
 - Before running tests, if the server is currently running (after running `npm run dev`), exit the server (keyboard command "Control + C" or "Command + C).
 - **Note:** To ensure the server shuts down, double check by running `lsof -i:3000` in the terminal. If the server is still running, you'll see its "PID" in the terminal, and you'll have to kill it (`kill -9 <PID>`) before testing.
