@@ -362,7 +362,8 @@ This integrated use of components and custom hooks allows for a modular and main
 ## Node.js & Express Backend
 
 
-#### `logController.js`
+### `logController.js`
+The main middleware that interacts with AWS lives here and contains the following middleware functions:
 
 #### `fetchLogGroups`
 
@@ -381,16 +382,27 @@ This integrated use of components and custom hooks allows for a modular and main
 - Parses log entries using various formats.
 - Passes the parsed log entries to the next middleware.
 
+---
+
 ### `configureAWS.js`
+All AWS requests funnel through this special middleware function, which does the following:
 
 - Configures the AWS SDK with credentials from headers (access-key, secret-key, aws-region).
 - Passes the configured AWS object to the next middleware.
+
+---
+
+## Route Endpoints
 
 ### `logRoutes.js`
 
 - Uses the `configureAWS` middleware to set up AWS configuration.
 - Defines routes for fetching logs, log groups, and log streams.
 - Uses the corresponding functions from `logController` to handle these requests.
+
+---
+
+## Main Server File
 
 ### `server.js`
 

@@ -91,23 +91,9 @@
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-<<<<<<< HEAD
-.github-icon, .linkedin-icon {
-    width: 10px; /* Set fixed width */
-    height: 10px; /* Set fixed height */
-    transition: transform 0.3s ease; /* Smooth transition for hover effect */
-}
-
-.github-link:hover .github-icon, .linkedin-link:hover .linkedin-icon {
-    transform: scale(1.2); /* Slightly enlarge the icon on hover */
-}
-
-
-=======
 .ContributorsTextWrapper,
 .ContributorsButtonWrapper {
     text-align: center; /* Center the content */
     width: 100%; /* Take full width */
     margin-top: .5em; /* 1em is the font size of the current element */
 }
->>>>>>> 2bc3e2ddc6eaac585cb1fce579f765866ab61828
