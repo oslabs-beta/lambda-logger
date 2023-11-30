@@ -16,7 +16,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 - Custom Log Interpreter
 - Searchable Logs
 
-## Instruction
+## Instructions
 - Visit https://lambdalogger.dev/, navigate to App, and enter your AWS temporary access credentials.
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
 - How to get the "access key" and "secret key" to log in?
