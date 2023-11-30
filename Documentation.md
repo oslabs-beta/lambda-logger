@@ -364,7 +364,7 @@ This integrated use of components and custom hooks allows for a modular and main
 
 #### `logController.js`
 
-###### `fetchLogGroups`
+#### `fetchLogGroups`
 
 - Uses the AWS SDK to describe log groups. `describeLogGroups` is a built-in method on the `AWS.CloudWatchLogs` constructor.
 - Filters log groups to include only those starting with "/aws/lambda".
