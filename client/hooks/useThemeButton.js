@@ -1,16 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import {
   stackoverflowDark,
   stackoverflowLight,
-} from "react-syntax-highlighter/dist/esm/styles/hljs";
+} from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 function useThemeButton() {
   const [theme, setTheme] = useState(stackoverflowDark);
-  const [themeButton, setThemeButton] = useState("Light Mode");
+  const [themeButton, setThemeButton] = useState('Light Mode');
   function handleThemeButtonClick() {
     theme === stackoverflowDark
-      ? (setTheme(stackoverflowLight), setThemeButton("Dark Mode"))
-      : (setTheme(stackoverflowDark), setThemeButton("Light Mode"));
+      ? (setTheme(stackoverflowLight), setThemeButton('Dark Mode'))
+      : (setTheme(stackoverflowDark), setThemeButton('Light Mode'));
   }
   return {
     theme,

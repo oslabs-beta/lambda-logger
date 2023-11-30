@@ -1,0 +1,28 @@
+.Footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333; /* Adjust background color as needed */
+    color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.FooterLinks {
+    list-style: none;
+    padding: 0;
+    margin-top: 2%; /* Reset default margin */
+}
+
+.FooterLink {
+    color: #fff; /* Initial link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.FooterLink:hover {
+    color: #ff711f; /* Color on hover */
+}
+
+/* New style for list items */
+.FooterLinks li {
+    margin-bottom: 15px; /* Adjust this value to increase/decrease spacing */
+}

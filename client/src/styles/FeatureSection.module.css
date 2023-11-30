@@ -1,0 +1,50 @@
+.FeatureSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 33.44vh; /* Approximately 2/3 of the previous section's height */
+    width: 100%;
+    background: linear-gradient(to right, 
+                rgba(255, 113, 31, 0) 0%,
+                rgba(255, 113, 31, .8) 0%, 
+                rgba(255, 113, 31, .8) 50%, 
+                rgba(204, 85, 0, .8) 100%),
+                rgba(255, 113, 31, 0) 0%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.Content {
+    text-align: center;
+    padding: 20px;
+    color: white; /* Adjust text color as needed */
+}
+
+.FeatureSection h2 {
+    /* Style your header */
+}
+
+.FeatureSection p {
+    text-align: center;
+}
+
+.HoverButton {
+    
+    background-color: white;
+    border: 2px solid white; /* Adjust border color as needed */
+    color: #ff711f; /* Adjust text color as needed */
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 25px; /* Rounded edges */
+}
+
+.HoverButton:hover {
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+   
+}
