@@ -9,8 +9,12 @@ export default function Header() {
       <h3 className={styles.LogoTitleContainer}>Lambda Logger</h3>
       <div className={styles.NavLinks}>
         <Link to="/" className={styles.NavLink}>Home</Link>
-        <Link to="/docs" className={styles.NavLink}>Docs</Link>
-        <Link to="/github" className={styles.NavLink}>Github</Link>
+        <a href="https://github.com/oslabs-beta/lambda-logger" target="_blank" rel="noopener noreferrer" className={styles.NavLink}>
+          Docs
+        </a>
+        <a href="https://github.com/oslabs-beta/lambda-logger" target="_blank" rel="noopener noreferrer" className={styles.NavLink}>
+          Github
+        </a>
         <Link to="/credentials" className={styles.NavLink}>App</Link>
       </div>
     </div>

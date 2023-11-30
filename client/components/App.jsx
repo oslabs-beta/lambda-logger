@@ -64,6 +64,7 @@ const App = () => {
   const {
     jsonString,
     searchQuery,
+    setSearchQuery,
     handleSearchChange
   } = useSearch(logs);
 
@@ -112,6 +113,7 @@ const App = () => {
                 searchQuery={searchQuery}
                 handleSearchChange={handleSearchChange}
                 setLogs={setLogs}
+                setSearchQuery={setSearchQuery}
               />
               <Console jsonString={jsonString} theme={theme} />
             </>

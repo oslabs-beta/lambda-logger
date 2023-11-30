@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function useSearch(jsonObject) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,6 +14,7 @@ function useSearch(jsonObject) {
     : jsonObject;
 
   const jsonString = JSON.stringify(filteredJson, null, 2);
+
   return {
     jsonString,
     searchQuery,
