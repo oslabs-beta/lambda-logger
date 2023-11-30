@@ -364,7 +364,7 @@ This integrated use of components and custom hooks allows for a modular and main
 
 #### `logController.js`
 
-#### `fetchLogGroups`
+###### `fetchLogGroups`
 
 - Uses the AWS SDK to describe log groups. `describeLogGroups` is a built-in method on the `AWS.CloudWatchLogs` constructor.
 - Filters log groups to include only those starting with "/aws/lambda".
@@ -459,16 +459,18 @@ Here's a breakdown of the parsing logic:
     
 4. **Parsing JSON:**
     
-    `let messageObj = null; 
-	    `if (match) {   
-		    `try {     
-		    `messageObj = JSON.parse(match[0]);   
-		    ``} catch (parseErr) {     
-		    `console.error('Error parsing JSON', parseErr);   
-		    ``} 
-		 ``}``
-    
-    If there is a JSON match, it attempts to parse the matched JSON string. If successful, the parsed JSON object is stored in `messageObj`.
+```
+let messageObj = null;
+  if (match) {
+    try {
+      messageObj = JSON.parse(match[0]);
+    } catch (parseErr) {
+      console.error('Error parsing JSON', parseErr);
+      }
+  }
+```
+
+If there is a JSON match, it attempts to parse the matched JSON string. If successful, the parsed JSON object is stored in `messageObj`.
     
 5. **Parsing Log Entry:**
     
@@ -478,11 +480,13 @@ Here's a breakdown of the parsing logic:
     
 6. **Combining Parsed Data:**
     
-    `if (messageObj !== null && parsedLogEntry.message) {   
-	    `parsedLogEntry[parsedLogEntry.message] = messageObj; 
-	    ``}
+```
+if (messageObj !== null && parsedLogEntry.message) {   
+	parsedLogEntry[parsedLogEntry.message] = messageObj; 
+}
+```
     
-    If there is a parsed JSON object (`messageObj`) and the log entry has a `message` field, it combines the parsed log entry with the JSON object.
+If there is a parsed JSON object (`messageObj`) and the log entry has a `message` field, it combines the parsed log entry with the JSON object.
     
 7. **Returning Parsed Entries:**
     
