@@ -10,7 +10,7 @@ const GetStarted = () => {
         </div>
         <div className={styles.RightBox}>
           {/* Place your high-resolution GIF here */}
-          <img src="../../src/images/Placeholder.png" alt="High Res" />
+          <img src="../../src/images/creds.png" alt="High Res" />
         </div>
       </div>
     );

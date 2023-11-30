@@ -6,11 +6,11 @@ export default function MainSection() {
     <div className={styles.MainSection}>
       <div className={styles.LeftBox}>
         <h2>Live Debug</h2>
-        <p>Using meaningful, labeled logs, color-encoded, and searchable.</p>
+        <p>Meaningful logs. <br/>Labeled, tagged with colors, <br/> and searchable.</p>
       </div>
       <div className={styles.RightBox}>
         {/* Place your high-resolution GIF here */}
-        <img src="../../src/images/Placeholder.png" alt="High Res" />
+        <img src="../../src/images/consoleContent.png" alt="High Res" />
       </div>
     </div>
   );

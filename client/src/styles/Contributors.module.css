@@ -5,11 +5,14 @@
     height: auto; /* Adjust based on content */
     width: 100%;
     background: linear-gradient(to right, 
-                rgba(255, 113, 31, 0) 0%, 
-                rgba(255, 113, 31, 0.75) 12.5%, 
-                rgba(255, 113, 31, 0.75) 87.5%, 
-                rgba(255, 113, 31, 0) 100%);
+    rgba(255, 113, 31, 0) 0%,
+    rgba(255, 113, 31, .8) 0%, 
+    rgba(255, 113, 31, .8) 50%, 
+    rgba(204, 85, 0, .8) 100%),
+    rgba(255, 113, 31, 0) 0%;
     padding: 20px 0; /* Vertical padding */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .ContributorsBox {
@@ -17,17 +20,21 @@
     text-align: center;
     background-color: rgba(255, 179, 128, 0.8); /* Lighter, translucent orange */
     padding: 20px;
-    border-radius: 10px; /* Optional for rounded corners */
+    border-radius: 15px; /* Softened edges *//* Optional for rounded corners */
     margin: 20px auto; /* Centering the box */
 }
 
 
 .ContributorCard {
     display: inline-block;
+    position: relative;
     margin: 10px;
     padding: 10px;
     width: 200px; /* Adjust as needed */
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
 }
 
 .ContributorCard img {
@@ -37,30 +44,51 @@
 }
 
 .ContributorLinks {
-    margin-top: 10px;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    position: relative;
+    width: 50px; /* Set fixed width */
+    height: 50px;
+    object-fit: contain; 
 }
 
 .ContributorsText {
     margin-top: 20px;
-    color: black; /* Adjust color as needed */
+     color: #333333; /* Dark gray for softer contrast *//* Adjust color as needed */
 }
 
 .ContributorsButton {
     margin-top: 10px;
     padding: 10px 30px; /* Oblong shape */
-    background-color: #fff; /* White background */
-    color: #ff711f; /* Orange text for contrast */
+    background-color: rgba(255, 255, 255, 0.8); /* White background */
+    color: #333; /* Orange text for contrast */
     border: 1px solid transparent; /* Transparent border, consistent width */
     border-radius: 25px; /* Rounded edges */
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: bold; /* Bold text */
+    border-radius: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .ContributorsButton:hover {
-    background-color: rgba(255, 179, 128, 0.8); /* Lighter, translucent orange */
+    background-color: #FFAB76; /* Soft peach tone *//* Lighter, translucent orange */
     border-color: #fff; /* White border, same width */
     color: #fff; /* White text on hover */
+    border-radius: 30px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.github-icon, .linkedin-icon {
+    width: 10px; /* Set fixed width */
+    height: 10px; /* Set fixed height */
+
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.github-link:hover .github-icon, .linkedin-link:hover .linkedin-icon {
+    transform: scale(1.2); /* Slightly enlarge the icon on hover */
 }
 
 

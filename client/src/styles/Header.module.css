@@ -1,7 +1,7 @@
 .Head {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: flex-end;
+    align-items: center; */
     position: fixed;
     top: 0;
     width: 100%;
@@ -11,11 +11,13 @@
     border-bottom: 2px solid #3c3c3c;
     z-index: 1;
     padding: 0 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .LogoTitleContainer {
     display: flex;
-    align-items: left;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .Head h3 {
@@ -31,6 +33,7 @@
 
 .NavLinks {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
 }
 

@@ -1,30 +1,36 @@
 .MainSection {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the boxes */
     align-items: center;
     height: 66.67vh; /* 2/3 of the viewport height */
     width: 100%;
-    padding: 0 10%; /* Equal padding on the left and right */
-    margin-top: 70px;
+    padding: 0 5%; /* Reduced overall padding */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .LeftBox {
-    width: 20%; /* 1/3 of the remaining horizontal space after padding */
-    text-align: center; /* Centering text */
+    width: 35%; /* Slightly increased width */
+    text-align: center;
     color: white;
+    font-size: 1.2em; /* Larger text size */
+    padding-right: 2%; /* Reduced space between text and image */
 }
 
 .RightBox {
-    width: 40%; /* 2/3 of the remaining horizontal space after padding */
-    height: calc(66.67vh * 1.1); /* Slightly taller than the MainSection */
+    width: 45%; /* Adjusted width */
+    height: calc(66.67vh * 1.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Ensures the content doesn't exceed the box */
+    overflow: hidden;
+    border-radius: 30px;
 }
 
 .RightBox img {
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain; /* Keeps the aspect ratio of the image/GIF */
+    object-fit: contain; /* Ensures the image scales properly */
+    border-radius: 7px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
+
