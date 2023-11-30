@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 function SecretKeyInput({ secretKey, setSecretKey }) {
   return (
     <form>
       <label>
-        Access Key
+        Secret Key
         <input
           type="text"
           onChange={(e) => setSecretKey(e.target.value)}

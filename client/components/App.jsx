@@ -4,31 +4,36 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Header.jsx';
 import Console from './Console.jsx';
 import '../src/styles.css';
-import Credentials from './Credentials.jsx';
-import ConsoleNav from './ConsoleNav.jsx';
+import Credentials from './Credentials/Credentials.jsx';
+import ConsoleNav from './ConsoleNav/ConsoleNav.jsx';
 import useLogGroups from '../hooks/useLogGroups';
 import useLogStreams from '../hooks/useLogStreams';
 import useLogs from '../hooks/useLogs';
 import useThemeButton from '../hooks/useThemeButton.js';
 import useSearch from '../hooks/useSearch.js';
+import Splash from './Splash/Splash.jsx';
 
 const App = () => {
 
-  /*********************** Initialize State for Credentials  ***************************/
+  /*********************** Initialize State for User Credentials  ************************************/
+
   const [accessKey, setAccessKey] = useState('');
   const [secretKey, setSecretKey] = useState('');
   const [region, setRegion] = useState('');
+  const [authenticated, setAuthenticated] = useState(false);
 
-  /*********************** Custom Hook for Log Groups fetch and state  ***************************/
+  /*********************** Custom Hook for managing API call fetching log groups and state  ***************************/
 
   const {
     logGroups,
     selectedLogGroup,
     setSelectedLogGroup,
     fetchLogGroups,
-  } = useLogGroups(accessKey, secretKey, region);
+    emptyRegion,
+    isLoading,
+  } = useLogGroups(accessKey, secretKey, region, setAuthenticated);
 
-  /*********************** Custom Hook for Log Streams fetch and state  ***************************/
+  /*********************** Custom Hook for managing API call fetching log streams and state  ***************************/
 
   const {
     logStreams,
@@ -37,7 +42,7 @@ const App = () => {
     fetchLogStreams,
   } = useLogStreams(accessKey, secretKey, region, selectedLogGroup);
 
-  /*********************** Custom Hook for Logs fetch and state  ***********************************/
+  /*********************** Custom Hook for managing API call fetching display logs and state  ***********/
 
   const {
     logs,
@@ -46,7 +51,7 @@ const App = () => {
   } = useLogs(accessKey, secretKey, region, selectedLogGroup, selectedLogStream);
  
 
-  /* ******************** THEME BUTTON CLICK HANDLER  *********************************************/
+  /* ******************** Custom hook for managing theme toggling in React components *****************/
 
   const {
     theme,
@@ -54,7 +59,7 @@ const App = () => {
     handleThemeButtonClick,
   } = useThemeButton();
 
-  /* ******************** SEARCH QUERY HANDLER  ******************* */
+  /* ******************** Custom hook for managing Search querying from ConsoleNav to Console *********/
   
   const {
     jsonString,
@@ -67,9 +72,15 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
+        <Route path="/" element={
+          <Splash />
+        }
+        />
         <Route path="/credentials" element=
           {
             <Credentials
+              authenticated={authenticated}
+              setAuthenticated={setAuthenticated}
               setAccessKey={setAccessKey}
               accessKey={accessKey}
               setSecretKey={setSecretKey}
@@ -78,15 +89,16 @@ const App = () => {
               region={region}
               getLogs={fetchLogs}
               getLogGroups={fetchLogGroups}
+              emptyRegion={emptyRegion}
+              isLoading={isLoading}
             />
           }
-        />
-
-        <Route path="/console" element=
-          {
+        /> 
+        <Route
+          path="/console"
+          element={
             <>
               <ConsoleNav
-                getLogs={fetchLogs}
                 getLogStreams={fetchLogStreams}
                 getLogGroups={fetchLogGroups}
                 logStreams={logStreams}
@@ -94,19 +106,16 @@ const App = () => {
                 selectedLogStream={selectedLogStream}
                 selectedLogGroup={selectedLogGroup}
                 setSelectedLogGroup={setSelectedLogGroup}
-                handleThemeButtonClick={handleThemeButtonClick} 
+                handleThemeButtonClick={handleThemeButtonClick}
                 themeButton={themeButton}
                 logGroups={logGroups}
                 searchQuery={searchQuery}
                 handleSearchChange={handleSearchChange}
                 setLogs={setLogs}
               />
-              <Console
-                jsonString={jsonString}
-                theme={theme}
-              />
+              <Console jsonString={jsonString} theme={theme} />
             </>
-          } 
+          }
         />
       </Routes>
     </Router>

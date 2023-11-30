@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import '../../../src/styles/Credentials.module.css';
-import AccessKeyInput from "./AccessKeyInput";
-import SecretKeyInput from "./SecretKeyInput"; // Create this component similarly
-import RegionSelect from "./RegionSelect";
-import SubmitButton from "./SubmitButton";
+import AccessKeyInput from './AccessKeyInput';
+import SecretKeyInput from './SecretKeyInput'; // Create this component similarly
+import RegionSelect from './RegionSelect';
+import SubmitButton from './SubmitButton';
 
 export default function CredentialsForm({
   accessKey,
@@ -15,7 +15,9 @@ export default function CredentialsForm({
   regionOptions,
   getLogGroups,
   setAuthenticated,
-  authenticated
+  authenticated,
+  emptyRegion,
+  isLoading,
 }) {
 
   const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
@@ -39,11 +41,12 @@ export default function CredentialsForm({
         secretKey={secretKey}
         region={region}
       />
-      {hasClickedSubmit && !authenticated && (
-        <>
-          <br />
-          <div style={{ color: "yellow" }} id="authMessage">Credentials Not Accepted</div>
-        </>
+      {isLoading && hasClickedSubmit && <div style={{ color: 'yellow' }} >Loading...</div>}
+      {!isLoading && hasClickedSubmit && !authenticated && !emptyRegion && (
+        <div style={{ color: 'yellow' }}>Credentials Not Accepted</div>
+      )}
+      {!isLoading && hasClickedSubmit && !authenticated && emptyRegion && (
+        <div style={{ color: 'yellow' }}>No Log Groups in Region</div>
       )}
     </div>
   );

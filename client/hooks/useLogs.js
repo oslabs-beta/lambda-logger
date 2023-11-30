@@ -10,7 +10,7 @@ function useLogs(
 ) {
   const [logs, setLogs] = useState('NO LOGS REQUESTED YET');
   const fetchLogs = useCallback(async () => {
-    const url = '/logs';
+    const url = "http://localhost:8080/credentials/logs";
 
     try {
       const response = await fetch(url, {

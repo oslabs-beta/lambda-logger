@@ -6,10 +6,10 @@ import LogStreamDropdown from './LogStreamDropdown.jsx';
 import InputBox from './InputBox.jsx';
 import ThemeButton from './ThemeButton.jsx'; 
 import RefreshButton from './RefreshButton.jsx'; 
-import useLogGroupOptions from "../../hooks/useLogGroupOptions"
-import useLogStreamOptions from "../../hooks/useLogStreamOptions"
-import useSelectStream from "../../hooks/useSelectStream"
-import useSelectGroup from "../../hooks/useSelectGroup"
+import useLogGroupOptions from '../../hooks/useLogGroupOptions';
+import useLogStreamOptions from '../../hooks/useLogStreamOptions';
+import useSelectStream from '../../hooks/useSelectStream';
+import useSelectGroup from '../../hooks/useSelectGroup';
 
 export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, setLogs }) {
 

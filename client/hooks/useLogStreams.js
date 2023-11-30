@@ -6,7 +6,7 @@ function useLogStreams(accessKey, secretKey, region, selectedLogGroup) {
   const [selectedLogStream, setSelectedLogStream] = useState('');
 
   const fetchLogStreams = useCallback(async () => {
-    const url = '/logstreams';
+    const url = "http://localhost:8080/credentials/logstreams";
 
     try {
       const response = await fetch(url, {

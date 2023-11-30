@@ -16,6 +16,7 @@
 
 .ConsoleNav button {
     width: 10em;
+    white-space: nowrap;
     margin-left: 10px;
     background-color: #484848;
     color: #dadada;
