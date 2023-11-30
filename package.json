@@ -1,7 +1,7 @@
 {
   "name": "Lambda-Logger",
   "version": "1.0.0",
-  "description": "",
+  "description": "Meaningful logs. Labeled, tagged with colors, and searchable.",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",

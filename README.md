@@ -1,81 +1,83 @@
 # Lambda-logger
-Lambda Logger tackles post-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible return values. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
-<p align="center">
-  <img src="./docs/assets/images/minLogo.png" width="30%" />
+<p align="left">
+  <img src="./docs/assets/images/minLogo.png" width="15%" />
 </p>
+Lambda Logger tackles post-lambda-deployment challenges by introducing an intuitive interface for swift log inspection. With JSON format logs and a custom parser for clarity, users gain accessible value. Ensuring security, the application employs AWS IAM credentials for authentication, diminishing reliance on the sluggish AWS CloudWatch console.
 
 ## Table of Contents
 1. [Features](#features)
-2. [Instruction](#instruction)
+2. [Instructions](#instructions)
 3. [Documentation](#documentation)
-4. [OSP Information](#osp-information)
+4. [Open Source Information](#open-source-information)
 5. [Contributors](#contributors)
 
 ## Features
-- 
-- 
-- 
+- Dynamically Fetch Logs From CloudWatch
+- Custom Log Interpreter
+- Searchable Logs
 
-## Instruction
+## Instructions
+- Visit https://lambdalogger.dev/, navigate to App, and enter your temporary AWS access credentials.
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
-- How to get the "access key" and "secret key" to log in?
-    - From your AWS root account, you should have your own "IAM" user in your AWS account. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
-    - After getting "IAM user", in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. In Summary, click `Create access key` --> choose `Local code` --> Check `I understand` box --> click `Next` --> In `Description tag value`, put any name you want to --> click `Create access key`
+- How can you get your "access key" and "secret key" to log in?
+    - From your AWS root account, you should have your own IAM user. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
+    - After getting your "IAM User" credentials, in your AWS Console, at the `search bar`, search for `IAM` and click. Go to the `Users` tab, then choose the IAM user that you just created. Click `Create access key` --> choose `Local code` --> Check the `I understand` box --> click `Next` --> In `Description tag value`, put any name you want --> click `Create access key`
 
     - ![](./docs/assets/images/get-access-key.gif)
 
-    - Now you should save the `Secret access key` somewhere(**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you never get that "Secret key access" anymore, unless you create a new one.
+    - Now you should save your `Secret access key` somewhere safe (**Note:** This key is very sensitive, do NOT publish), or click on `Download .csv file` before clicking `Done`. If you forget this step, you won't have a chance to view your "Secret key access" again, so you'll have to create a new one.
 
-    - **Note:** You only can create up to "2 Access keys". If you want to create another one, you must delete the old one.
-    - After getting the keys, get the region 
-    ![](./docs/assets/images/region.png)
-
-- Since we have all stuff to log in, on the terminal run `npm install`, then `npm run dev`, navigate to http://localhost:8080/ to view the web application, and use both keys and region to access.
+    - **Note:** You can only create up to two Access keys at a time per user. If you want to create another one, you must delete an old one.
+   
+- Now that we have our credentials, in your local terminal, run `npm install`, then `npm run dev`. Navigate to http://localhost:8080 to view the web application, navigate to the App page, and enter your credentials and region to access your Lambda Logs.
     ![](./docs/assets/images/homepage.png)
 
 - Nav Bar Overview (Dropdowns, Search, Theme)
 ![](./docs/assets/images/consolePage.png)
-- Select the Log group and Log Stream you want to access from your "Lambda function", then you will get content that looks like this:
+- Select a Lambda Function Log group and Log Stream to view, then you'll get content that looks like this:
 ![](./docs/assets/images/consoleContent.png)
 
 ## Documentation
-- How AWS SDK Is Implemented?
-    - A software development kit (SDK) is a set of platform-specific building tools for developers. You require components like debuggers, compilers, and libraries to create code that runs on a specific platform, operating system, or programming language. SDKs put everything you need to develop and run software in one place. Additionally, they contain resources like documentation, tutorials, and guides as well as APIs and frameworks for faster application development.
-    - We use The AWS SDK for JavaScript v3 API Reference Guide which provides a JavaScript API for AWS services. Particularly in this project, our team "AWS-SDK" to fetch data from CloudWatch.
+- Full documentation available [here](https://github.com/oslabs-beta/lambda-logger/blob/main/Documentation.md)
+- How is the AWS SDK Implemented?
+    - A software development kit (SDK) is a set of platform-specific building tools for developers. Developers require components like debuggers, compilers, and libraries to create code that runs on a specific platform, operating system, or programming language. SDKs put everything you need to develop and run software in one place. Additionally, they contain resources like documentation, tutorials, and guides as well as APIs and frameworks for faster application development.
+    - Lambda Logger uses the AWS SDK for JavaScript v3 API Reference Guide which provides a JavaScript API for AWS services. This project uses the AWS-SDK to fetch data from CloudWatch.
     - For more info, click [here](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/welcome.html).
 
 - React Syntax Highlighter
     - Syntax highlighting component for `React`` using the seriously super amazing [lowlight](https://github.com/wooorm/lowlight) and [refractor](https://github.com/wooorm/refractor) by [wooorm](https://github.com/wooorm).
     - Click [here](https://www.npmjs.com/package/react-syntax-highlighter) for more information.
 
-## OSP Information
+## Open Source Information
 ### Testing
-- How to test? Before testing, if you are in the server(after hitting `npm run dev`), exit the server(on the keyboard, press the combination "Control + C").
-- **Note:** To ensure there is no bug/confliction, double check by running `lsof -i:3000` on the terminal, if it still exists, you may see its "PID" on your terminal, and you have to kill it(`kill -9 <PID>`) before do testing.
+- Before running tests, if the server is currently running (after running `npm run dev`), exit the server (keyboard command "Control + C" or "Command + C).
+- **Note:** To ensure the server shuts down, double check by running `lsof -i:3000` in the terminal. If the server is still running, you'll see its "PID" in the terminal, and you'll have to kill it (`kill -9 <PID>`) before testing.
     - Run `npm run test` to test the whole app.
-    - Run `npm run test <filename.js>` to test only that file.
+    - Run `npm run test <filename.js>` to test only that specific file.
 ### Roadmap
 | Feature                                          | Status |
 | ------------------------------------------------ | ------ |
-| Dynamically Fetch Logs and Stream From CloudWatch| ✅     |
+| Dynamically Fetch Logs From CloudWatch           | ✅     |
 | Back-end Testing                                 | ✅     |
 | Dark/Light Mode                                  | ✅     |
 | Increase Testing Coverage                        | ⏳     |
-| Make Stream Content linkable                     | ⚡️      |
-| Adding more themes                               | ⚡️      |
-| Improving search                                 | ⚡️      |
+| Make Stream Content Linkable/Shareable           | ⚡️      |
+| Add More Themes!                                 | ⚡️      |
+| Improve Search Functionality                     | ⚡️      |
 
 - ✅ = Completed
 - ⏳ = In-Progress
 - ⚡️ = Backlog
 
 ### Contributing
-- Potential iteration ideas
-- What needs to be improved (code-wise)
-    - Anything from the backlog
-    - Add additional front-end tests
-    - Add additional back-end tests
-    - Migrate to AWS SDK 3
+- Potential Iteration Ideas
+  - Anything from the backlog
+  - Add additional front-end tests
+  - Add additional back-end tests
+  - Migrate to AWS SDK 3
+  - Implemnet Apache Solr for better search
+  - Implement Grafana to make expanded dashboards
+  - Improve or expand the capabilities of the JSON parser (see documentation)
 
 ## Contributors
 
@@ -116,6 +118,5 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
   </tr>
 </table>
 
-- 💻 = Website
 - 🖇️ = LinkedIn
 - 🐙 = Github
