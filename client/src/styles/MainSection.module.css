@@ -11,9 +11,10 @@
 .LeftBox {
     width: 35%; /* Slightly increased width */
     text-align: center;
-    color: white;
-    font-size: 1.2em; /* Larger text size */
-    padding-right: 2%; /* Reduced space between text and image */
+    color: rgb(235, 235, 235);
+    font-size: 1.2em;
+    font-weight: normal; /* Larger text size */
+    padding-right: 15%; /* Reduced space between text and image */
 }
 
 .RightBox {

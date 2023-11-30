@@ -11,7 +11,7 @@ function useLogGroups(accessKey, secretKey, region, setAuthenticated) {
     async (setAuthenticated) => {
       setIsLoading(true);
       setEmptyRegion(false);
-      const url = "http://localhost:8080/credentials/loggroups";
+      const url = "/credentials/loggroups";
 
       try {
         const response = await fetch(url, {

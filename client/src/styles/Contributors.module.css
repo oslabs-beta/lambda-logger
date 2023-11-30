@@ -83,7 +83,6 @@
 .github-icon, .linkedin-icon {
     width: 10px; /* Set fixed width */
     height: 10px; /* Set fixed height */
-
     transition: transform 0.3s ease; /* Smooth transition for hover effect */
 }
 

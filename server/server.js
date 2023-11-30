@@ -8,7 +8,7 @@ const logRoutes = require('./routes/logRoutes');
 
 // Middleware
 app.use(express.json());
-app.use('/build', express.static(path.resolve(__dirname, '../build')));
+app.use('/', express.static(path.resolve(__dirname, '../build')));
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
 

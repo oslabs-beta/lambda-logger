@@ -10,7 +10,7 @@ export default function Header() {
       <div className={styles.NavLinks}>
         <Link to="/" className={styles.NavLink}>Home</Link>
         <Link to="/docs" className={styles.NavLink}>Docs</Link>
-        <Link to="/github" className={styles.NavLink}>Github</Link>
+        <Link to="https://github.com/oslabs-beta/lambda-logger" className={styles.NavLink}>Github</Link>
         <Link to="/credentials" className={styles.NavLink}>App</Link>
       </div>
     </div>
