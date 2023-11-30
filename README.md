@@ -12,11 +12,12 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 5. [Contributors](#contributors)
 
 ## Features
-- 
-- 
-- 
+- Dynamically Fetch Logs From CloudWatch
+- Custom Log Interpreter
+- Search Logs
 
 ## Instruction
+- Visit https://lambdalogger.dev/, navigate to App, and enter your AWS temporary access credentials.
 - From [Lambda-logger](https://github.com/oslabs-beta/lambda-logger), fork to your repo, then in the terminal, `git clone 'copied URL'`
 - How to get the "access key" and "secret key" to log in?
     - From your AWS root account, you should have your own "IAM" user in your AWS account. If you do not have it yet, click [here](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) to learn how to create it.
@@ -57,7 +58,7 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
 ### Roadmap
 | Feature                                          | Status |
 | ------------------------------------------------ | ------ |
-| Dynamically Fetch Logs and Stream From CloudWatch| ✅     |
+| Dynamically Fetch Logs From CloudWatch           | ✅     |
 | Back-end Testing                                 | ✅     |
 | Dark/Light Mode                                  | ✅     |
 | Increase Testing Coverage                        | ⏳     |
