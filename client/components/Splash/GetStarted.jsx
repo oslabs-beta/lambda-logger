@@ -6,8 +6,8 @@ const GetStarted = () => {
     <div className={styles.MainSection}>
       <div className={styles.LeftBox}>
         <h2>Getting Started</h2>
-        <p>Create temporary access credentials in you AWS account, 
-          then enter those in our application to scrape your logs 
+        <p>Create temporary access credentials in your AWS account, 
+          then use them to scrape your logs 
           from CloudWatch and run them through our custom parser.<br/><br/>
           Lambda Logger never stores your credentials, and we dont retain 
           your logs after you leave.<br/><br/> Log streams are pulled directly from

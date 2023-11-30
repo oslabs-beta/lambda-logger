@@ -11,7 +11,7 @@ import useLogStreamOptions from '../../hooks/useLogStreamOptions';
 import useSelectStream from '../../hooks/useSelectStream';
 import useSelectGroup from '../../hooks/useSelectGroup';
 
-export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, setLogs }) {
+export default function ConsoleNav({ setSearchQuery, searchQuery, handleSearchChange, getLogGroups, handleThemeButtonClick, themeButton, logGroups, selectedLogGroup, setSelectedLogGroup, getLogStreams, logStreams, selectedLogStream, setSelectedLogStream, setLogs }) {
 
   const { logGroupOptions } = useLogGroupOptions(logGroups);
   const { logStreamOptions } = useLogStreamOptions(logStreams);
@@ -42,6 +42,7 @@ export default function ConsoleNav({ searchQuery, handleSearchChange, getLogGrou
         getLogGroups={getLogGroups}
         getLogStreams={getLogStreams}
         setLogs={setLogs}
+        setSearchQuery={setSearchQuery}
       />
     </div>
   );

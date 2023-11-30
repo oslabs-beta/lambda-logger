@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SubmitButton({
   authenticated,
@@ -10,11 +10,14 @@ function SubmitButton({
 }) {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (authenticated && hasClickedSubmit) {
+      navigate("/console");
+    }
+  }, [authenticated, hasClickedSubmit, navigate]);
+
   const handleClick = async () => {
     setHasClickedSubmit(true);
-    if (authenticated && hasClickedSubmit) {
-      navigate('/console');
-    }
   };
 
   return <button onClick={handleClick}>Submit</button>;
