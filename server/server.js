@@ -25,8 +25,12 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message });
 });
 
+<<<<<<< HEAD
 const server = app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+=======
+const server = app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+>>>>>>> 41fb3dee5efd6696c5005726f6c451ced56267e2
 
 module.exports = server;
