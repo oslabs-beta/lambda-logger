@@ -117,6 +117,5 @@ Lambda Logger tackles post-deployment challenges by introducing an intuitive int
   </tr>
 </table>
 
-- 💻 = Website
 - 🖇️ = LinkedIn
 - 🐙 = Github
