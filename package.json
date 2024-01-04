@@ -4,9 +4,9 @@
   "description": "Meaningful logs. Labeled, tagged with colors, and searchable.",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js & webpack-dev-server",
-    "build": "webpack --mode production",
+    "start": "NODE_ENV=production node server/server.js",
+    "build": "NODE_ENV=production webpack",
+    "dev": "NODE_ENV=development nodemon server/server.js & NODE_ENV=development webpack serve --open",
     "test": "jest"
   },
   "keywords": [],

@@ -8,9 +8,13 @@ const logRoutes = require('./routes/logRoutes');
 
 // Middleware
 app.use(express.json());
-app.use('/', express.static(path.resolve(__dirname, '../build')));
-app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === 'production') {
+  // app.use(express.static(path.resolve(__dirname, '../build')));
+  app.use(express.static(path.resolve(__dirname, '../client')));
+} else {
+  app.use(express.static(path.resolve(__dirname, '../client')));
+}
 
 // Routes
 app.use('/credentials', logRoutes);
