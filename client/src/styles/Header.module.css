@@ -48,3 +48,36 @@
 .NavLink:hover {
     color: yellow; /* Replace with your desired hover color */
 }
+
+@media only screen and (max-width: 600px) {
+
+    .LogoTitleContainer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        
+    }
+
+    .NavLinks {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    .NavLink {
+        color: #d8d8d8;
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 10px;
+        transition: color 0.3s;
+    }
+
+    .Head {
+        h3 {
+            display: none; 
+        }
+    }
+
+
+}
