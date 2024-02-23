@@ -50,11 +50,24 @@
     .LeftBox, .RightBox {
         width: 100%;
         padding: 0;
-        text-align: center;
+        margin-top: 4vh;
+        font-size: medium;
+
+        h2 {
+            margin-top: 8vh;
+        }
+
+        p {
+            font-weight: lighter;
+        }
     }
 
     .RightBox {
         height: auto;
         border-radius: 0;
+    }
+
+    img {
+        margin-bottom: 6vh;
     }
 }
